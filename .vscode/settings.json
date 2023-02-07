@@ -10,5 +10,6 @@
   },
   "[markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  }
+  },
+  "thunder-client.saveToWorkspace": true
 }

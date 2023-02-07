@@ -1,0 +1,86 @@
+[
+  {
+    "_id": "2edbc18a-847d-4346-8329-829e7d0e76e7",
+    "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
+    "containerId": "",
+    "name": "template request",
+    "url": "{{URL_API_DISCORD}}/api/v{{VERSION_DISCORD}}",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-02-07T04:12:54.095Z",
+    "modified": "2023-02-17T22:37:55.816Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN_BOT}}",
+      "bearerPrefix": "Bot"
+    },
+    "tests": []
+  },
+  {
+    "_id": "d53b9ae6-e82a-417f-b899-6e87df36cb92",
+    "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
+    "containerId": "",
+    "name": "get guild by id",
+    "url": "{{URL_API_DISCORD}}/api/v{{VERSION_DISCORD}}/guilds/{guild.id}",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-02-07T04:13:49.746Z",
+    "modified": "2023-02-17T22:38:21.411Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "guild.id",
+        "value": "826117250657419315",
+        "isPath": true
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN_BOT}}",
+      "bearerPrefix": "Bot"
+    },
+    "tests": []
+  },
+  {
+    "_id": "681900d0-ea6c-49cb-a7e8-269715aca8e3",
+    "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
+    "containerId": "",
+    "name": "create message by channel",
+    "url": "{{URL_API_DISCORD}}/api/v{{VERSION_DISCORD}}/channels/{channel.id}/messages",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-02-07T04:15:07.489Z",
+    "modified": "2023-02-17T22:38:27.731Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "multipart/form-data"
+      }
+    ],
+    "params": [
+      {
+        "name": "channel.id",
+        "value": "827708188907929673",
+        "isPath": true
+      }
+    ],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "content",
+          "value": "test message"
+        }
+      ]
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN_BOT}}",
+      "bearerPrefix": "Bot"
+    },
+    "tests": []
+  }
+]
