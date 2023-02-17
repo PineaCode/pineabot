@@ -11,5 +11,6 @@
   "[markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "thunder-client.saveToWorkspace": true
+  "thunder-client.saveToWorkspace": true,
+  "discord.enabled": true
 }
