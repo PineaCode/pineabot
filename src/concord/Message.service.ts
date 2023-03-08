@@ -7,14 +7,13 @@ export class MessageService {
 		const formData = new FormData()
 		formData.set('content', message)
 
-		if (channelIdList.length > 1) {
-			await Promise.allSettled(
-				channelIdList.map((channelId: string) => {
-					return this.request.http.request(`/channels/${channelId}/messages`, 'POST', formData)
-				}),
-			)
-		} else {
-			await this.request.http.request(`/channels/${channelIdList[0]}/messages`, 'POST', formData)
-		}
+		await Promise.allSettled(
+			channelIdList.map((channelId: string) => {
+				return this.request.http.request(`/channels/${channelId}/messages`, {
+					method: 'POST',
+					body: formData,
+				})
+			}),
+		)
 	}
 }

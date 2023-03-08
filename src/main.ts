@@ -1,6 +1,7 @@
 import { ConfigService } from '$/services/Config.service.ts'
 import { GatewayService } from '$/services/Gateway.service.ts'
 import { MessageService } from '$/concord/Message.service.ts'
+import { MADURO_NAME_ALIAS } from '$/entities/consts.ts'
 
 try {
 	const config = new ConfigService()
@@ -19,18 +20,7 @@ function reactionMaduro(config: ConfigService, gateway: GatewayService, message:
 	const channelIdResponse: string = config.get('ID_CHANNEL_RESPONSE') || ''
 
 	gateway.messageCreate(serverId, channelIdListeningList, async (inputMessage) => {
-		const maduroAliasList = [
-			'Maduro',
-			'maduro',
-			'madurito',
-			'Nicolas',
-			'Nicolas Maduro',
-			'nicolas maduro',
-			'Nicolas maduro',
-			'nicolas Maduro',
-		]
-
-		if (maduroAliasList.includes(inputMessage)) {
+		if (MADURO_NAME_ALIAS.includes(inputMessage)) {
 			await message.create([channelIdResponse], 'Maduro coño e\' tu madre! 🤬')
 		}
 	})

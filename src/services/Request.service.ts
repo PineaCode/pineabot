@@ -27,9 +27,15 @@ export class RequestService {
 		return {
 			async request<D = unknown>(
 				path = '',
-				method: string,
-				body: BodyInit | null = null,
-				headers: { [key: string]: string } = {},
+				{
+					method,
+					body = null,
+					headers = {},
+				}: {
+					method: string
+					body?: BodyInit | null
+					headers?: { [key: string]: string }
+				},
 			): Promise<D> {
 				const { baseUrl, requestInit } = clientConfig
 				const pathname = path.search(/\//) > -1 ? path : `/${path}`
