@@ -13,7 +13,7 @@ export class WebSocketService {
 	}
 
 	private events(callbackOpen: () => void): void {
-		this.ws.onclose = (event) => {
+		this.ws.onopen = (event) => {
 			const date = new Date(event.timeStamp).toISOString()
 			console.log('OPEN: ', date)
 			callbackOpen()
