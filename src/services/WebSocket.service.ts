@@ -13,18 +13,17 @@ export class WebSocketService {
 	}
 
 	private events(callbackOpen: () => void): void {
-		this.ws.onopen = (event) => {
-			const date = new Date(event.timeStamp).toISOString()
-			console.log('OPEN: ', date)
+		this.ws.onopen = (_event) => {
+			console.log(WebSocketService.name, 'START ')
 			callbackOpen()
 		}
 
 		this.ws.onclose = (event) => {
-			console.log('CLOSE: ', event.reason)
+			console.log(WebSocketService.name, 'CLOSE', event.reason || 'Witout reason')
 		}
 
 		this.ws.onerror = (event) => {
-			console.log('ERROR: ', event)
+			console.log(WebSocketService.name, 'ERROR', event)
 		}
 	}
 }

@@ -16,7 +16,7 @@ export class ConfigService {
 		ConfigService.envs = await load()
 	}
 
-	public get(variableName: string): string | undefined {
+	public get(variableName: TConfig): string | undefined {
 		return ConfigService.envs[variableName] || Deno.env.get(variableName)
 	}
 
