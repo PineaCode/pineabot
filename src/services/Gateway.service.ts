@@ -9,10 +9,8 @@ export class GatewayService {
 
 	constructor(token?: string) {
 		const { TOKEN_BOT = '', URL_WS_DISCORD = '', VERSION_DISCORD = '10' } = this.config.getObject()
-		const { ws, sendPayloadList } = new WebSocketService(
-			`${URL_WS_DISCORD}/?v=${VERSION_DISCORD}&encoding=json`,
-			this.init(token || TOKEN_BOT),
-		)
+		const wsURL = `${URL_WS_DISCORD}/?v=${VERSION_DISCORD}&encoding=json`
+		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token || TOKEN_BOT))
 
 		this.ws = ws
 		this.send = sendPayloadList

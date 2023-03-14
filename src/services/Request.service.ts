@@ -1,6 +1,4 @@
-import { ConfigService } from '$/services/Config.service.ts'
-
-interface IClientConfig {
+type TClientConfig = {
 	baseUrl: string
 	requestInit: RequestInit
 }
@@ -8,14 +6,13 @@ interface IClientConfig {
 export class RequestService {
 	public readonly http
 
-	constructor(private readonly config = new ConfigService()) {
-		const { URL_API_DISCORD = '', VERSION_DISCORD = '10', TOKEN_BOT = '' } = this.config.getObject()
-		const clientConfig: IClientConfig = {
-			baseUrl: `${URL_API_DISCORD}/api/v${VERSION_DISCORD}`,
+	constructor(baseUrl: string, token: string) {
+		const clientConfig: TClientConfig = {
+			baseUrl,
 			requestInit: {
 				headers: {
 					'Accept': '*/*',
-					'Authorization': `Bot ${TOKEN_BOT}`,
+					'Authorization': `Bot ${token}`,
 				},
 			},
 		}
@@ -23,7 +20,7 @@ export class RequestService {
 		this.http = this.init(clientConfig)
 	}
 
-	private init(clientConfig: IClientConfig) {
+	private init(clientConfig: TClientConfig) {
 		return {
 			async request<D = unknown>(
 				path = '',

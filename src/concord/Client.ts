@@ -1,5 +1,5 @@
 import { GatewayService } from '$/services/Gateway.service.ts'
-import { MessageService } from '$/concord/Message.service.ts'
+import { MessageService } from '$/services/Message.service.ts'
 import { Events, TClientOptions } from '$/concord/typing.ts'
 
 export class Client {
@@ -8,7 +8,7 @@ export class Client {
 
 	constructor(options?: TClientOptions) {
 		const gateway = new GatewayService(options?.token)
-		const message = new MessageService()
+		const message = new MessageService(options?.token)
 
 		this.on = gateway.eventsListening()
 		this.sendMessage = message.create()

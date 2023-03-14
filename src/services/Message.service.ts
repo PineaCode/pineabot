@@ -1,10 +1,14 @@
+import { ConfigService } from '$/services/Config.service.ts'
 import { RequestService } from '$/services/Request.service.ts'
 
 export class MessageService {
+	private readonly config = new ConfigService()
 	private readonly request: RequestService
 
-	constructor() {
-		this.request = new RequestService()
+	constructor(token?: string) {
+		const { URL_API_DISCORD = '', VERSION_DISCORD = '10', TOKEN_BOT = '' } = this.config.getObject()
+		const baseUrl = `${URL_API_DISCORD}/api/v${VERSION_DISCORD}`
+		this.request = new RequestService(baseUrl, token || TOKEN_BOT)
 	}
 
 	public create() {

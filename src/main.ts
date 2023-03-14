@@ -16,12 +16,10 @@ try {
 	console.error('APP_ERROR: ', (error as Error).message)
 }
 
-function reactionMaduro(config: ConfigService, client: Client) {
-	const channelIdResponse: string = config.get('ID_CHANNEL_RESPONSE') || ''
-
+function reactionMaduro(_config: ConfigService, client: Client) {
 	client.on(Events.MessageCreate, async (data: TMessageCreateData) => {
 		if (MADURO_NAME_ALIAS.includes(data.content)) {
-			await client.sendMessage([channelIdResponse], 'Maduro coño e\' tu madre! 🤬')
+			await client.sendMessage([data.channel_id], 'Maduro coño e\' tu madre! 🤬')
 		}
 	})
 }
