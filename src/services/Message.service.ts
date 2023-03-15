@@ -5,10 +5,10 @@ export class MessageService {
 	private readonly config = new ConfigService()
 	private readonly request: RequestService
 
-	constructor(token?: string) {
-		const { URL_API_DISCORD = '', VERSION_DISCORD = '10', TOKEN_BOT = '' } = this.config.getObject()
+	constructor(token: string) {
+		const { URL_API_DISCORD = '', VERSION_DISCORD = '10' } = this.config.getObject()
 		const baseUrl = `${URL_API_DISCORD}/api/v${VERSION_DISCORD}`
-		this.request = new RequestService(baseUrl, token || TOKEN_BOT)
+		this.request = new RequestService(baseUrl, token)
 	}
 
 	public create() {
