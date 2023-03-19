@@ -1,20 +1,22 @@
 import { loadSync } from 'dotenv'
 import { resolve } from 'path'
 
+import { UtilService } from '$/services/Util.service.ts'
 import { GatewayService } from '$/services/Gateway.service.ts'
 import { MessageService } from '$/services/Message.service.ts'
 import { RequestService } from '$/services/Request.service.ts'
-import { Events, TClientOptions, TEnvs, TUtil } from '$/concord/typing.ts'
+import { Events, TClientOptions, TEnvs, TTools } from '$/concord/typing.ts'
 import { Loaders } from '$/concord/Loaders.ts'
 
-export class Client {
+export class Client extends UtilService {
 	private options: TClientOptions
-	private envs: TEnvs
 	private loaders: Loaders
 	public on: TEventFC
 	public sendMessage: TMessageFC
+	public envs: TEnvs
 
 	constructor(options?: Partial<TClientOptions>) {
+		super()
 		this.envs = loadSync({ envPath: 'concord.env' }) as TEnvs
 		const { TOKEN = '', PREFIX = '' } = this.envs
 		const token = options?.token || TOKEN
@@ -44,23 +46,16 @@ export class Client {
 	}
 
 	public actions(): void {
-		const changeCasing = (input: string): string => {
-			if (!input) return ''
-
-			if (input.indexOf('_') > -1) {
-				const regex = new RegExp('_.', 'gm')
-				return input.toLowerCase().replace(regex, (match) => {
-					const char = match.replace('_', '')
-					return char.toUpperCase()
-				})
-			} else return input
-		}
-
 		this.on(Events.MessageCreate, async (data: TMessageCreateData) => {
 			try {
+				const tools: TTools = {
+					client: this,
+					request: new RequestService().http.request,
+				}
+
 				// Run Events
-				const eventName = changeCasing(Events.MessageCreate)
-				await this.loaders.actions[eventName](data, { client: this })
+				const eventName = this.changeCasing(Events.MessageCreate)
+				await this.loaders.actions[eventName](data, tools)
 
 				// Run Commands
 				const { content } = data
@@ -72,11 +67,7 @@ export class Client {
 							...data,
 							content: messages.join(' '),
 						},
-						<TUtil> {
-							client: this,
-							envs: this.envs,
-							request: new RequestService().http.request,
-						},
+						tools,
 					)
 
 					// TODO: Extraer subcommands y message por separado

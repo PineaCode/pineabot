@@ -9,7 +9,6 @@ export class MessageService {
 		const { URL_API_DISCORD = '', VERSION_DISCORD = '10' } = this.config.getObject()
 		const baseUrl = `${URL_API_DISCORD}/api/v${VERSION_DISCORD}`
 		this.http = new RequestService(baseUrl, `Bot ${token}`).http
-		console.log(MessageService.name, 'START')
 	}
 
 	public create() {

@@ -19,10 +19,9 @@ export type TEnvs = {
 
 export { GatewayDispatchEvents as Events }
 
-export type TUtil = {
+export type TTools = {
 	client: Client
-	envs: TEnvs
 	request: RequestService['http']['request']
 }
 
-export type TAction = (data: TMessageCreateData, util: TUtil) => Promise<void>
+export type TAction = (data: TMessageCreateData, tools: TTools) => Promise<void>

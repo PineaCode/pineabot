@@ -1,28 +1,34 @@
 import { resolve } from 'path'
 
-export class Loaders {
-	public actions: any = null
+import { UtilService } from '$/services/Util.service.ts'
+import { TAction } from '$/concord/typing.ts'
+
+export class Loaders extends UtilService {
+	public actions!: TActionList
 
 	constructor(eventsPath: string, commandsPath: string) {
+		super()
 		this.eventLoad(eventsPath)
 		this.commandLoad(commandsPath)
 	}
 
 	private async eventLoad(path: string): Promise<void> {
-		// TODO: mejorar array de eventos para obtenerlos desde discord
-		const eventsFiles = ['ready', 'messageCreate']
+		try {
+			// load commands from files
+			const eventEntry = Deno.readDir(path)
 
-		// Load events from files
-		for (const file of eventsFiles) {
-			try {
-				// Import event file
-				const eventPath = resolve(path, `${file}.evt.ts`)
-
-				const event = (await import(eventPath)) as Record<string, any>
+			// Load events from files
+			for await (const entry of eventEntry) {
+				const fileName = entry.name
+				const eventPath = resolve(path, fileName)
+				const event = (await import(eventPath)) as Record<string, TAction>
 
 				// Create events object
 				this.actions = { ...this.actions, ...event }
-			} catch (_) { /*  */ }
+			}
+		} catch (err) {
+			const { message } = err as Error
+			console.log(Loaders.name, 'ERROR', message)
 		}
 	}
 
@@ -33,13 +39,15 @@ export class Loaders {
 
 			for await (const entry of commandEntry) {
 				const fileName = entry.name
-				if (fileName.search(/[a-z0-9]*\.cmd\.ts/i) > -1) {
-					const cmdPath = resolve(path, fileName)
-					const command = (await import(cmdPath)) as Record<string, any>
-					// Create commands object
-					this.actions = { ...this.actions, ...command }
-				}
+				const cmdPath = resolve(path, fileName)
+				const command = (await import(cmdPath)) as Record<string, TAction>
+
+				// Create commands object
+				this.actions = { ...this.actions, ...command }
 			}
-		} catch (_) { /*  */ }
+		} catch (err) {
+			const { message } = err as Error
+			console.log(Loaders.name, 'ERROR', message)
+		}
 	}
 }
