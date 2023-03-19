@@ -82,5 +82,33 @@
       "bearerPrefix": "Bot"
     },
     "tests": []
+  },
+  {
+    "_id": "62e6dc80-7438-44be-bf98-361272ca0e6c",
+    "colId": "cf9060d1-d10d-4e95-97c5-6d15f7824de1",
+    "containerId": "",
+    "name": "test message",
+    "url": "https://api.openai.com/v1/chat/completions",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-03-16T03:09:59.113Z",
+    "modified": "2023-03-16T04:22:54.015Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"model\": \"gpt-3.5-turbo\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"hola\"\n    }\n  ],\n  \"temperature\": 0.7\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{OPENAI_API_KEY}}"
+    },
+    "tests": []
   }
 ]

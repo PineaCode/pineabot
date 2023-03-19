@@ -1,6 +1,5 @@
 {
   "tasks": {
-    "dev": "deno run --allow-read --allow-env --allow-net --watch src/main.ts",
     "start": "deno run --allow-read --allow-env --allow-net src/main.ts"
   },
   "importMap": "./import_map.json",
@@ -8,7 +7,8 @@
     "files": {
       "include": [
         "src/",
-        "test/"
+        "test/",
+        "scripts.config.ts"
       ]
     },
     "options": {

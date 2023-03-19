@@ -3,17 +3,20 @@ import { resolve } from 'path'
 
 import { GatewayService } from '$/services/Gateway.service.ts'
 import { MessageService } from '$/services/Message.service.ts'
-import { Events, TClientOptions, TEnvs } from '$/concord/typing.ts'
+import { RequestService } from '$/services/Request.service.ts'
+import { Events, TClientOptions, TEnvs, TUtil } from '$/concord/typing.ts'
 import { Loaders } from '$/concord/Loaders.ts'
 
 export class Client {
 	private options: TClientOptions
+	private envs: TEnvs
 	private loaders: Loaders
 	public on: TEventFC
 	public sendMessage: TMessageFC
 
 	constructor(options?: Partial<TClientOptions>) {
-		const { TOKEN = '', PREFIX = '' } = loadSync({ envPath: 'concord.env' }) as TEnvs
+		this.envs = loadSync({ envPath: 'concord.env' }) as TEnvs
+		const { TOKEN = '', PREFIX = '' } = this.envs
 		const token = options?.token || TOKEN
 
 		const gateway = new GatewayService(token)
@@ -62,9 +65,19 @@ export class Client {
 				// Run Commands
 				const { content } = data
 				if (!data.author.bot && content.startsWith(this.options.prefix)) {
-					const [command, ..._messages] = content.substring(1).split(' ')
-					// console.log(command, _messages)
-					this.loaders.actions[command](data, { client: this })
+					const [command, ...messages] = content.substring(1).split(' ')
+					// console.log(command, messages)
+					this.loaders.actions[command](
+						<TMessageCreateData> {
+							...data,
+							content: messages.join(' '),
+						},
+						<TUtil> {
+							client: this,
+							envs: this.envs,
+							request: new RequestService().http.request,
+						},
+					)
 
 					// TODO: Extraer subcommands y message por separado
 					// const action = content.split(' ').filter((t) => t)

@@ -6,13 +6,13 @@ type TClientConfig = {
 export class RequestService {
 	public readonly http
 
-	constructor(baseUrl: string, token: string) {
+	constructor(baseUrl: string = '', bearerToken: string = '') {
 		const clientConfig: TClientConfig = {
 			baseUrl,
 			requestInit: {
 				headers: {
 					'Accept': '*/*',
-					'Authorization': `Bot ${token}`,
+					...(bearerToken ? { 'Authorization': bearerToken } : null),
 				},
 			},
 		}

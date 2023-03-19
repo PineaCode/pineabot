@@ -1,13 +1,7 @@
-import { Client } from '$/concord/Client.ts'
+import { TAction } from '$/concord/typing.ts'
 import { MADURO_NAME_ALIAS } from '$/entities/consts.ts'
-import { TEnvs } from '$/concord/typing.ts'
 
-interface IUtil {
-	client: Client
-	envs: TEnvs
-}
-
-export async function messageCreate(data: TMessageCreateData, { client }: IUtil) {
+export const messageCreate: TAction = async (data, { client }) => {
 	const message = data.content.toLowerCase()
 	const channelId = data.channel_id
 

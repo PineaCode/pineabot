@@ -3,12 +3,13 @@ import { RequestService } from '$/services/Request.service.ts'
 
 export class MessageService {
 	private readonly config = new ConfigService()
-	private readonly request: RequestService
+	private readonly http: RequestService['http']
 
 	constructor(token: string) {
 		const { URL_API_DISCORD = '', VERSION_DISCORD = '10' } = this.config.getObject()
 		const baseUrl = `${URL_API_DISCORD}/api/v${VERSION_DISCORD}`
-		this.request = new RequestService(baseUrl, token)
+		this.http = new RequestService(baseUrl, `Bot ${token}`).http
+		console.log(MessageService.name, 'START')
 	}
 
 	public create() {
@@ -18,7 +19,7 @@ export class MessageService {
 
 			await Promise.allSettled(
 				channelIdList.map((channelId: string) => {
-					return this.request.http.request(`/channels/${channelId}/messages`, {
+					return this.http.request(`/channels/${channelId}/messages`, {
 						method: 'POST',
 						body: formData,
 					})

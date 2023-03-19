@@ -1,12 +1,6 @@
-import { Client } from '$/concord/Client.ts'
-import { TEnvs } from '$/concord/typing.ts'
+import { TAction } from '$/concord/typing.ts'
 
-interface IUtil {
-	client: Client
-	envs: TEnvs
-}
-
-export async function ping(data: TMessageCreateData, { client }: IUtil) {
+export const ping: TAction = async (data, { client }) => {
 	const dateMessage = new Date(data.timestamp).getTime()
 	const dateNow = Date.now()
 	const ping = dateNow - dateMessage
