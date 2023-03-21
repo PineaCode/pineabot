@@ -5,5 +5,5 @@ export const ping: TAction = async (data, { client }) => {
 	const dateNow = Date.now()
 	const ping = dateNow - dateMessage
 
-	await client.sendMessage([data.channel_id], `🛰️ Pong - duración: **${ping} ms**`)
+	await client.message.send([data.channel_id], `🛰️ Pong - duración: **${ping} ms**`)
 }

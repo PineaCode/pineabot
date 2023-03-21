@@ -31,5 +31,5 @@ Ahora, un usuario llamado ${user} escribe lo siguiente: ${message}, respondele s
 	})
 
 	const { content } = response.choices[0].message
-	await client.sendMessage([data.channel_id], content)
+	await client.message.send([data.channel_id], content)
 }

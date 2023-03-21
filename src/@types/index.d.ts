@@ -217,5 +217,5 @@ type TEventFC = (
 type TMessageFC = (channelIdList: string[], message: string) => Promise<void>
 
 type TActionList = {
-	[key: string]: import('$/concord/typing.ts').TAction
+	[key: string]: import('$/concord/typing.ts').TAction<any>
 }

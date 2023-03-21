@@ -12,7 +12,7 @@ export class Client extends UtilService {
 	private options: TClientOptions
 	private loaders: Loaders
 	public on: TEventFC
-	public sendMessage: TMessageFC
+	public message: MessageService
 	public envs: TEnvs
 
 	constructor(options?: Partial<TClientOptions>) {
@@ -22,7 +22,7 @@ export class Client extends UtilService {
 		const token = options?.token || TOKEN
 
 		const gateway = new GatewayService(token)
-		const message = new MessageService(token)
+		this.message = new MessageService(token)
 
 		this.options = {
 			token,
@@ -31,12 +31,15 @@ export class Client extends UtilService {
 
 		this.loaders = new Loaders(resolve('src', 'events'), resolve('src', 'commands'))
 		this.on = gateway.eventsListening()
-		this.sendMessage = message.create()
 	}
 
 	public async start(): Promise<void> {
 		await new Promise((resolve, _reject) => {
-			this.on(Events.Ready, (_data: TReadyData) => {
+			this.on(Events.Ready, (data: TReadyData) => {
+				this.loaders.actions['ready'](data, {
+					client: this,
+					request: new RequestService().http.request,
+				})
 				console.log(Client.name, 'START')
 				resolve(null)
 			})
@@ -76,7 +79,7 @@ export class Client extends UtilService {
 				}
 			} catch (_) {
 				console.log('❌ Comando Incorrecto')
-				this.sendMessage([data.channel_id], '❌ Comando Incorrecto')
+				this.message.send([data.channel_id], '❌ Comando Incorrecto')
 			}
 		})
 	}

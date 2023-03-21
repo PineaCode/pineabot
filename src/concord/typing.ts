@@ -24,4 +24,4 @@ export type TTools = {
 	request: RequestService['http']['request']
 }
 
-export type TAction = (data: TMessageCreateData, tools: TTools) => Promise<void>
+export type TAction<D = TMessageCreateData> = (data: D, tools: TTools) => Promise<void>

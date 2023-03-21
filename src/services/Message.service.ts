@@ -11,19 +11,29 @@ export class MessageService {
 		this.http = new RequestService(baseUrl, `Bot ${token}`).http
 	}
 
-	public create() {
-		return async (channelIdList: string[], message: string): Promise<void> => {
-			const formData = new FormData()
-			formData.set('content', message)
+	public async read(channelIdList: string[], limit: number): Promise<TGetMessages[][]> {
+		return await Promise.all(
+			channelIdList.map((channelId: string) => {
+				return this.http.request<TGetMessages[]>(`/channels/${channelId}/messages?limit=${limit}`, {
+					method: 'GET',
+				})
+			}),
+		)
+	}
 
-			await Promise.allSettled(
-				channelIdList.map((channelId: string) => {
-					return this.http.request(`/channels/${channelId}/messages`, {
-						method: 'POST',
-						body: formData,
-					})
-				}),
-			)
-		}
+	public async send(channelIdList: string[], message: string): Promise<void> {
+		// return async (channelIdList: string[], message: string): Promise<void> => {
+		const formData = new FormData()
+		formData.set('content', message)
+
+		await Promise.all(
+			channelIdList.map((channelId: string) => {
+				return this.http.request(`/channels/${channelId}/messages`, {
+					method: 'POST',
+					body: formData,
+				})
+			}),
+		)
+		// }
 	}
 }

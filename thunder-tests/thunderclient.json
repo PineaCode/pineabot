@@ -110,5 +110,35 @@
       "bearer": "{{OPENAI_API_KEY}}"
     },
     "tests": []
+  },
+  {
+    "_id": "36989a52-2a39-48e7-818e-b5e374b5c29a",
+    "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
+    "containerId": "",
+    "name": "get message by channel",
+    "url": "{{URL_API_DISCORD}}/api/v{{VERSION_DISCORD}}/channels/{channel.id}/messages?limit=10",
+    "method": "GET",
+    "sortNum": 15000,
+    "created": "2023-03-21T02:12:29.526Z",
+    "modified": "2023-03-21T02:36:26.584Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "channel.id",
+        "value": "1064665809231806514",
+        "isPath": true
+      },
+      {
+        "name": "limit",
+        "value": "10",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}",
+      "bearerPrefix": "Bot"
+    },
+    "tests": []
   }
 ]
