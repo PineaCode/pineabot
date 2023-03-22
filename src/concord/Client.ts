@@ -1,24 +1,25 @@
-import { loadSync } from 'dotenv'
 import { resolve } from 'path'
 
+import { ConfigService, TConfig } from '$/services/Config.service.ts'
 import { UtilService } from '$/services/Util.service.ts'
 import { GatewayService } from '$/services/Gateway.service.ts'
 import { MessageService } from '$/services/Message.service.ts'
 import { RequestService } from '$/services/Request.service.ts'
-import { Events, TClientOptions, TEnvs, TTools } from '$/concord/typing.ts'
+import { Events, TClientOptions, TTools } from '$/concord/typing.ts'
 import { Loaders } from '$/concord/Loaders.ts'
 
 export class Client extends UtilService {
+	private readonly config: ConfigService = new ConfigService()
 	private options: TClientOptions
 	private loaders: Loaders
 	public on: TEventFC
 	public message: MessageService
-	public envs: TEnvs
+	public envs: Record<TConfig, string>
 
 	constructor(options?: Partial<TClientOptions>) {
 		super()
-		this.envs = loadSync({ envPath: 'concord.env' }) as TEnvs
-		const { TOKEN = '', PREFIX = '' } = this.envs
+		this.envs = this.config.getObject()
+		const { TOKEN = '', PREFIX = '$' } = this.envs
 		const token = options?.token || TOKEN
 
 		const gateway = new GatewayService(token)

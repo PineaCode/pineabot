@@ -11,12 +11,6 @@ export type TClientOptions = {
 	// intentsFlags: number[]
 }
 
-export type TEnvs = {
-	TOKEN: string
-	PREFIX: string
-	[key: string]: string
-}
-
 export { GatewayDispatchEvents as Events }
 
 export type TTools = {

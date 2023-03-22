@@ -1,12 +1,13 @@
 import { load } from 'dotenv'
 
-type TConfig =
-	| 'URL_API_DISCORD'
-	| 'URL_WS_DISCORD'
-	| 'VERSION_DISCORD'
-	| 'ID_SERVER'
-	| 'ID_CHANNEL_LISTENING_LIST'
-	| 'ID_CHANNEL_RESPONSE'
+export type TConfig =
+	| 'DISCORD_URL_API'
+	| 'DISCORD_URL_WS'
+	| 'DISCORD_VERSION'
+	| 'TOKEN'
+	| 'PREFIX'
+	| 'OPENAI_URL'
+	| 'OPENAI_API_KEY'
 
 export class ConfigService {
 	private static envs: Record<TConfig, string>

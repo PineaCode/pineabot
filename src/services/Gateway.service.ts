@@ -8,8 +8,8 @@ export class GatewayService {
 	private readonly send: WebSocketService['sendPayloadList']
 
 	constructor(token: string) {
-		const { URL_WS_DISCORD = '', VERSION_DISCORD = '10' } = this.config.getObject()
-		const wsURL = `${URL_WS_DISCORD}/?v=${VERSION_DISCORD}&encoding=json`
+		const { DISCORD_URL_WS = '', DISCORD_VERSION = '10' } = this.config.getObject()
+		const wsURL = `${DISCORD_URL_WS}/?v=${DISCORD_VERSION}&encoding=json`
 		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token))
 
 		this.ws = ws

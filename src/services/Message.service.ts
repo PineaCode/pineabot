@@ -6,8 +6,8 @@ export class MessageService {
 	private readonly http: RequestService['http']
 
 	constructor(token: string) {
-		const { URL_API_DISCORD = '', VERSION_DISCORD = '10' } = this.config.getObject()
-		const baseUrl = `${URL_API_DISCORD}/api/v${VERSION_DISCORD}`
+		const { DISCORD_URL_API = '', DISCORD_VERSION = '10' } = this.config.getObject()
+		const baseUrl = `${DISCORD_URL_API}/api/v${DISCORD_VERSION}`
 		this.http = new RequestService(baseUrl, `Bot ${token}`).http
 	}
 

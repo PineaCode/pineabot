@@ -2,11 +2,11 @@ import { ConfigService } from '$/services/Config.service.ts'
 import { Client } from '$/concord/Client.ts'
 
 try {
-	// Load environment variables of project
+	// Cargar variables de entorno en el proyecto
 	const config = new ConfigService()
 	await config.load()
 
-	// Create client concord
+	// Crear cliente Concord
 	const client = new Client()
 	await client.start()
 } catch (error) {
