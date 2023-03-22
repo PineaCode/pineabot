@@ -22,7 +22,6 @@ export class MessageService {
 	}
 
 	public async send(channelIdList: string[], message: string): Promise<void> {
-		// return async (channelIdList: string[], message: string): Promise<void> => {
 		const formData = new FormData()
 		formData.set('content', message)
 
@@ -34,6 +33,5 @@ export class MessageService {
 				})
 			}),
 		)
-		// }
 	}
 }

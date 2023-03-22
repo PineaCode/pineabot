@@ -10,5 +10,6 @@ try {
 	const client = new Client()
 	await client.start()
 } catch (error) {
-	console.error('APP_ERROR: ', (error as Error).message)
+	const { message } = error as Error
+	console.error(message)
 }

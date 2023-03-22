@@ -17,16 +17,30 @@ export class ConfigService {
 		this.envPath = envPath
 	}
 
+	private isObjectEmpty(obj: { [key: string]: string }): boolean {
+		return Object.keys(obj).length === 0
+	}
+
 	public async load(): Promise<void> {
-		ConfigService.envs = await load({ envPath: this.envPath })
+		const envsFromFile = await load({ envPath: this.envPath })
+		const envsFromSystem = Deno.env.toObject() as Record<TConfig, string>
+
+		if (!this.isObjectEmpty(envsFromFile)) {
+			ConfigService.envs = envsFromFile
+		} else if (!this.isObjectEmpty(envsFromSystem)) {
+			ConfigService.envs = envsFromSystem
+		}
+
+		if (!ConfigService.envs) {
+			throw new Error(`${ConfigService.name} ERROR Environment variables not found`)
+		}
 	}
 
 	public get(variableName: TConfig): string | undefined {
-		return ConfigService.envs[variableName] || Deno.env.get(variableName)
+		return ConfigService.envs[variableName]
 	}
 
 	public getObject(): Record<TConfig, string> {
-		const envsObject = ConfigService.envs || Deno.env.toObject()
-		return envsObject
+		return ConfigService.envs
 	}
 }

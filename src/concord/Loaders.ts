@@ -28,11 +28,11 @@ export class Loaders extends UtilService {
 			}
 		} catch (err) {
 			const { message } = err as Error
-			console.log(Loaders.name, 'ERROR', message)
+			throw new Error(`${Loaders.name} ERROR ${message}`)
 		}
 	}
 
-	private async commandLoad(path: string) {
+	private async commandLoad(path: string): Promise<void> {
 		try {
 			// load commands from files
 			const commandEntry = Deno.readDir(path)
@@ -47,7 +47,7 @@ export class Loaders extends UtilService {
 			}
 		} catch (err) {
 			const { message } = err as Error
-			console.log(Loaders.name, 'ERROR', message)
+			throw new Error(`${Loaders.name} ERROR ${message}`)
 		}
 	}
 }
