@@ -1,7 +1,15 @@
 import { TAction } from '$/concord/typing.ts'
 
 export const gpt: TAction = async (data, { client, request }) => {
-	const user = data.author.username
+	if (!data.member.roles.includes('827701782020620289')) {
+		return client.message.send([data.channel_id], '⚠️ No tiene los permisos necesarios para usar este comando.')
+	}
+
+	if (!data.content) {
+		return client.message.send([data.channel_id], '❌ Este comando require un mensaje.')
+	}
+
+	const { username: user, id: userId } = data.author
 	const message = data.content.trim()
 	const { OPENAI_URL, OPENAI_API_KEY } = client.envs
 
@@ -23,6 +31,7 @@ y fuiste programado usando: "Deno y Typescript". Te comportaras acorde a las sig
 - Siempre responder directamente sin saludar al usuario.
 - Saludar al usuario si este saluda primero.
 - Las respuestas que contengan código siempre se enviaran en formato markdown.
+- Si mencionas al usuario hazlo con este formato: <@${userId}>
 Ahora, un usuario llamado ${user} escribe lo siguiente: ${message}, respondele segun las reglas establecidas anteriormente.`,
 				},
 			],
@@ -31,5 +40,5 @@ Ahora, un usuario llamado ${user} escribe lo siguiente: ${message}, respondele s
 	})
 
 	const { content } = response.choices[0].message
-	await client.message.send([data.channel_id], content)
+	client.message.send([data.channel_id], content)
 }
