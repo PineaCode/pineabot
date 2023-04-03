@@ -8,6 +8,7 @@ export type TConfig =
 	| 'PREFIX'
 	| 'OPENAI_URL'
 	| 'OPENAI_API_KEY'
+	| 'CHANNEL_ID_CHAT'
 
 export class ConfigService {
 	private static envs: Record<TConfig, string>

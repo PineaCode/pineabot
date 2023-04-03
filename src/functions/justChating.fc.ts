@@ -2,7 +2,7 @@ import { TTools } from '$/concord/typing.ts'
 
 export function justChating({ client, request }: TTools): void {
 	setInterval(async () => {
-		const CHANNEL_ID = '827708188907929673'
+		const CHANNEL_ID = client.envs.CHANNEL_ID_CHAT
 		let [messages] = await client.message.read([CHANNEL_ID], 10)
 		const isPineaCode = messages.find((msg) => msg.author.username === 'anonimusXD')
 
