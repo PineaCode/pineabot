@@ -11,7 +11,7 @@ export class MessageService {
 		this.http = new RequestService(baseUrl, `Bot ${token}`).http
 	}
 
-	public async read(channelIdList: string[], limit: number): Promise<TGetMessages[][]> {
+	public async read(channelIdList: string[], limit: number): Promise<(TGetMessages[] | null)[]> {
 		return await Promise.all(
 			channelIdList.map((channelId: string) => {
 				return this.http.request<TGetMessages[]>(`/channels/${channelId}/messages?limit=${limit}`, {
@@ -21,17 +21,30 @@ export class MessageService {
 		)
 	}
 
-	public async send(channelIdList: string[], message: string): Promise<void> {
+	public async send(channelIdList: string[], message: string): Promise<(TSendMessage | null)[]> {
 		const formData = new FormData()
 		formData.set('content', message)
 
-		await Promise.all(
+		return await Promise.all(
 			channelIdList.map((channelId: string) => {
-				return this.http.request(`/channels/${channelId}/messages`, {
+				return this.http.request<TSendMessage>(`/channels/${channelId}/messages`, {
 					method: 'POST',
 					body: formData,
 				})
 			}),
 		)
 	}
+
+	public async delete(channelId: string, messageId: string): Promise<void> {
+		const data = await this.http.request<void | { message: string; code: number }>(
+			`/channels/${channelId}/messages/${messageId}`,
+			{
+				method: 'DELETE',
+			},
+		)
+		if (data && data.code === 10008) throw new Error('Message not found')
+	}
+
+	// TODO:
+	// public async deleteBulk() {}
 }

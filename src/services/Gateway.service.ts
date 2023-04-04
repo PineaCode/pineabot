@@ -7,16 +7,16 @@ export class GatewayService {
 	private readonly ws: WebSocketService['ws']
 	private readonly send: WebSocketService['sendPayloadList']
 
-	constructor(token: string) {
+	constructor(token: string, prefix: string) {
 		const { DISCORD_URL_WS = '', DISCORD_VERSION = '10' } = this.config.getObject()
 		const wsURL = `${DISCORD_URL_WS}/?v=${DISCORD_VERSION}&encoding=json`
-		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token))
+		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token, prefix))
 
 		this.ws = ws
 		this.send = sendPayloadList
 	}
 
-	private init(token: string): () => void {
+	private init(token: string, prefix: string): () => void {
 		const payloadList = [
 			{ op: GatewayOpcodes.Heartbeat, d: null },
 			{
@@ -36,8 +36,8 @@ export class GatewayService {
 				d: {
 					since: 91879201,
 					activities: [{
-						name: 'Coding',
-						type: 0,
+						name: `comando ${prefix}`,
+						type: 2,
 					}],
 					status: 'online',
 					afk: false,

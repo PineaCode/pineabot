@@ -2,11 +2,30 @@ import { TAction } from '$/concord/typing.ts'
 
 export const gpt: TAction = async (data, { client, request }) => {
 	if (!data.member.roles.includes('827701782020620289')) {
-		return client.message.send([data.channel_id], '⚠️ No tiene los permisos necesarios para usar este comando.')
+		const [response] = await client.message.send(
+			[data.channel_id],
+			'⚠️ No tienes los permisos necesarios para usar este comando.',
+		)
+
+		if (response) {
+			setTimeout(() => {
+				client.message.delete(data.channel_id, response.id)
+			}, 5000)
+		}
+
+		return
 	}
 
 	if (!data.content) {
-		return client.message.send([data.channel_id], '❌ Este comando require un mensaje.')
+		const [response] = await client.message.send([data.channel_id], '❌ Este comando requiere de un mensaje.')
+
+		if (response) {
+			setTimeout(() => {
+				client.message.delete(data.channel_id, response.id)
+			}, 5000)
+		}
+
+		return
 	}
 
 	const { username: user, id: userId } = data.author
@@ -30,8 +49,8 @@ y fuiste programado usando: "Deno y Typescript". Te comportaras acorde a las sig
 - Ayudar a la comunidad del servidor con sus problemas.
 - Siempre responder directamente sin saludar al usuario.
 - Saludar al usuario si este saluda primero.
-- Las respuestas que contengan código siempre se enviaran en formato markdown.
-- Si mencionas al usuario hazlo con este formato: <@${userId}>
+- Las respuestas que contengan código de programación siempre se enviaran en formato markdown.
+- Comienza cualquier respuesta mencionando al usuario usando este formato: <@${userId}>
 Ahora, un usuario llamado ${user} escribe lo siguiente: ${message}, respondele segun las reglas establecidas anteriormente.`,
 				},
 			],
@@ -39,6 +58,8 @@ Ahora, un usuario llamado ${user} escribe lo siguiente: ${message}, respondele s
 		}),
 	})
 
-	const { content } = response.choices[0].message
-	client.message.send([data.channel_id], content)
+	if (response) {
+		const { content } = response.choices[0].message
+		client.message.send([data.channel_id], content)
+	}
 }

@@ -1,16 +1,18 @@
 import { TTools } from '$/concord/typing.ts'
 
-export function justChating({ client, request }: TTools): void {
+export function justChating({ client, request }: TTools) {
 	setInterval(async () => {
 		const CHANNEL_ID = client.envs.CHANNEL_ID_CHAT
 		let [messages] = await client.message.read([CHANNEL_ID], 10)
-		const isPineaCode = messages.find((msg) => msg.author.username === 'anonimusXD')
+		if (!messages) return
 
-		if (!isPineaCode) {
+		const messagePineaCode = messages.find((msg: TGetMessages) => msg.author.username === 'anonimusXD')
+
+		if (messagePineaCode?.type !== 0) {
 			messages = messages.filter((msg) => {
 				return (
 					// Filtrar los mensajes que pertenecen a los bot
-					!msg.author['bot'] &&
+					!msg.author.bot &&
 					// Filtrar los comentarios que contengan menciones
 					!msg.mentions.length &&
 					// Filtrar los mensajes que no sean de tipo texto
@@ -18,7 +20,7 @@ export function justChating({ client, request }: TTools): void {
 					// Filtrar los mesanjes muy cortos
 					msg.content.length > 10 &&
 					// Filtrar los comandos hacia los bots
-					new RegExp(/[a-zA-Z0-9]/).test(msg.content[0])
+					new RegExp(/^(\¡|\$|\&|\%|\/|\?|\!)*/).test(msg.content[0]) // TODO: mejorar este regex
 				)
 			})
 
@@ -48,8 +50,10 @@ El texto debe ser un comentario de un usuario mas, debe ser informativo con dato
 					}),
 				})
 
-				const { content } = response.choices[0].message
-				await client.message.send([CHANNEL_ID], content)
+				if (response) {
+					const { content } = response.choices[0].message
+					await client.message.send([CHANNEL_ID], content)
+				}
 			}
 		}
 	}, 1000 * 60 * 60)

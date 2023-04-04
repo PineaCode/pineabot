@@ -22,7 +22,7 @@ export class Client extends UtilService {
 		const { TOKEN = '', PREFIX = '$' } = this.envs
 		const token = options?.token || TOKEN
 
-		const gateway = new GatewayService(token)
+		const gateway = new GatewayService(token, PREFIX)
 		this.message = new MessageService(token)
 
 		this.options = {

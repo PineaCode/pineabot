@@ -33,7 +33,7 @@ export class RequestService {
 					body?: BodyInit | null
 					headers?: { [key: string]: string }
 				},
-			): Promise<D> {
+			): Promise<D | null> {
 				const { baseUrl, requestInit } = clientConfig
 				const pathname = path.search(/\//) > -1 ? path : `/${path}`
 
@@ -47,7 +47,7 @@ export class RequestService {
 					body,
 				})
 
-				const data = await response.json()
+				const data = (response.status === 200) ? await response.json() : null
 				return data
 			},
 		}

@@ -8,12 +8,12 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-02-07T04:12:54.095Z",
-    "modified": "2023-02-17T22:37:55.816Z",
+    "modified": "2023-04-04T03:22:30.565Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "{{TOKEN_BOT}}",
+      "bearer": "{{TOKEN}}",
       "bearerPrefix": "Bot"
     },
     "tests": []
@@ -27,7 +27,7 @@
     "method": "GET",
     "sortNum": 20000,
     "created": "2023-02-07T04:13:49.746Z",
-    "modified": "2023-02-17T22:38:21.411Z",
+    "modified": "2023-04-04T04:26:08.370Z",
     "headers": [],
     "params": [
       {
@@ -38,7 +38,7 @@
     ],
     "auth": {
       "type": "bearer",
-      "bearer": "{{TOKEN_BOT}}",
+      "bearer": "{{TOKEN}}",
       "bearerPrefix": "Bot"
     },
     "tests": []
@@ -48,20 +48,15 @@
     "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
     "containerId": "",
     "name": "create message by channel",
-    "url": "{{DISCORD_URL_API}}/api/v{{DISCORD_VERSION}}/channels/{channel.id}/messages",
+    "url": "{{DISCORD_URL_API}}/api/v{{DISCORD_VERSION}}/channels/{channelId}/messages",
     "method": "POST",
     "sortNum": 30000,
     "created": "2023-02-07T04:15:07.489Z",
-    "modified": "2023-02-17T22:38:27.731Z",
-    "headers": [
-      {
-        "name": "Content-Type",
-        "value": "multipart/form-data"
-      }
-    ],
+    "modified": "2023-04-04T04:26:25.730Z",
+    "headers": [],
     "params": [
       {
-        "name": "channel.id",
+        "name": "channelId",
         "value": "827708188907929673",
         "isPath": true
       }
@@ -78,7 +73,7 @@
     },
     "auth": {
       "type": "bearer",
-      "bearer": "{{TOKEN_BOT}}",
+      "bearer": "{{TOKEN}}",
       "bearerPrefix": "Bot"
     },
     "tests": []
@@ -132,6 +127,66 @@
         "name": "limit",
         "value": "10",
         "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}",
+      "bearerPrefix": "Bot"
+    },
+    "tests": []
+  },
+  {
+    "_id": "5b39eb0c-1178-4e4f-8cc3-913510888b18",
+    "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
+    "containerId": "",
+    "name": "delete messages",
+    "url": "{{DISCORD_URL_API}}/api/v{{DISCORD_VERSION}}/channels/{channel.id}/messages/bulk-delete",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-04-04T03:20:38.224Z",
+    "modified": "2023-04-04T03:30:41.684Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "channel.id",
+        "value": "827708188907929673",
+        "isPath": true
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"messages\": [\n    \"1092531952831176865\",\n    \"1092531732810567691\"\n  ]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}",
+      "bearerPrefix": "Bot"
+    },
+    "tests": []
+  },
+  {
+    "_id": "0eab7f91-f45a-4f7c-9b8e-1a718a50e6c3",
+    "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
+    "containerId": "",
+    "name": "delete message by id",
+    "url": "{{DISCORD_URL_API}}/api/v{{DISCORD_VERSION}}/channels/{channel.id}/messages/{message.id}",
+    "method": "DELETE",
+    "sortNum": 35000,
+    "created": "2023-04-04T03:24:57.329Z",
+    "modified": "2023-04-04T03:36:17.250Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "channel.id",
+        "value": "827708188907929673",
+        "isPath": true
+      },
+      {
+        "name": "message.id",
+        "value": "1087949200001613834",
+        "isPath": true
       }
     ],
     "auth": {
