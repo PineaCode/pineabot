@@ -1,14 +1,20 @@
-export const MADURO_NAME_ALIAS = [
+export const WORDS_MADURO = [
 	'maduro',
 	'madurito',
+	'madurote',
+	'madurista',
 	'nicolas',
-	'nicolas maduro',
+	'chavez',
+	'chavista',
+	'socialista',
+	'socialismo',
 ]
 
-export const MESSAGES_HOT = [
+export const WORDS_HOT = [
 	'hot',
 	'sexo',
 	'sexy',
 	'noporn',
 	'rico',
+	'hentai',
 ]

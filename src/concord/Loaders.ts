@@ -1,13 +1,11 @@
 import { resolve } from 'path'
 
-import { UtilService } from '$/services/Util.service.ts'
 import { TAction } from '$/concord/typing.ts'
 
-export class Loaders extends UtilService {
+export class Loaders {
 	public actions!: TActionList
 
 	constructor(eventsPath: string, commandsPath: string) {
-		super()
 		this.eventLoad(eventsPath)
 		this.commandLoad(commandsPath)
 	}

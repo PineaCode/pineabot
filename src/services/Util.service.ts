@@ -1,5 +1,5 @@
 export abstract class UtilService {
-	protected changeCasing(input: string): string {
+	public changeCasing(input: string): string {
 		if (!input) return ''
 
 		if (input.indexOf('_') > -1) {
@@ -9,5 +9,9 @@ export abstract class UtilService {
 				return char.toUpperCase()
 			})
 		} else return input
+	}
+
+	public static searchWords(message: string, wordList: string[]): boolean {
+		return message.split(' ').find((word: string) => wordList.includes(word.toLowerCase())) !== undefined
 	}
 }
