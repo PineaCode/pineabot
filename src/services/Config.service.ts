@@ -6,6 +6,7 @@ export type TConfig =
 	| 'DISCORD_VERSION'
 	| 'TOKEN'
 	| 'PREFIX'
+	| 'GITHUB_URL'
 	| 'OPENAI_URL'
 	| 'OPENAI_API_KEY'
 	| 'CHANNEL_ID_CHAT'

@@ -1,4 +1,5 @@
-import { TTools } from '$/concord/typing.ts'
+import type { TTools } from '$/concord/typing.ts'
+import type { TApiOpenAI } from '$/types/apis.type.ts'
 
 export function justChating({ client, request }: TTools) {
 	setInterval(async () => {
@@ -28,7 +29,7 @@ export function justChating({ client, request }: TTools) {
 				const comments = messages.map((msg) => `- "${msg.content.substring(0, 150)}"`).join('\n')
 				const { OPENAI_URL, OPENAI_API_KEY } = client.envs
 
-				const response = await request<TResponseApiOpenAI>(OPENAI_URL + '/v1/chat/completions', {
+				const response = await request<TApiOpenAI['completions']>(OPENAI_URL + '/v1/chat/completions', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

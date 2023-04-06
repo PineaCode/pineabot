@@ -1,4 +1,5 @@
-import { TAction } from '$/concord/typing.ts'
+import type { TAction } from '$/concord/typing.ts'
+import type { TApiOpenAI } from '$/types/apis.type.ts'
 
 export const gpt: TAction = async (data, { client, request }) => {
 	if (!data.member.roles.includes('827701782020620289')) {
@@ -32,7 +33,7 @@ export const gpt: TAction = async (data, { client, request }) => {
 	const message = data.content.trim()
 	const { OPENAI_URL, OPENAI_API_KEY } = client.envs
 
-	const response = await request<TResponseApiOpenAI>(OPENAI_URL + '/v1/chat/completions', {
+	const response = await request<TApiOpenAI['completions']>(OPENAI_URL + '/v1/chat/completions', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
