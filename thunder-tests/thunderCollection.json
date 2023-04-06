@@ -8,9 +8,16 @@
   },
   {
     "_id": "cf9060d1-d10d-4e95-97c5-6d15f7824de1",
-    "colName": "GPT",
+    "colName": "OpenAI",
     "created": "2023-03-16T03:04:47.558Z",
     "sortNum": 20000,
+    "folders": []
+  },
+  {
+    "_id": "0ad49968-3912-4a8d-b57f-7593223f98f1",
+    "colName": "Github",
+    "created": "2023-04-05T23:04:29.042Z",
+    "sortNum": 30000,
     "folders": []
   }
 ]
