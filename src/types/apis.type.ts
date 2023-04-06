@@ -153,3 +153,118 @@ export type TRepo = {
 	network_count: 1
 	subscribers_count: 1
 }
+
+// NPM _________________________________________________________________________________________________________________
+
+type TObjectString = { [key: string]: string }
+
+type TUser = {
+	name: string
+	email: string
+	url?: string
+}
+
+export type TApiNPM = {
+	package: {
+		_id: 'instagrapi'
+		_rev: '47-dfb900d4e88ed5e1564484afc0ec7ff5'
+		name: 'instagrapi'
+		'dist-tags': {
+			latest: '5.0.0'
+		}
+		versions: {
+			[key: string]: {
+				name: 'instagrapi'
+				version: '3.2.3'
+				description: 'Library to obtain information from an Instagram account in a friendly and intuitive way'
+				keywords: string[]
+				main: 'dist/index.js'
+				types: 'dist/index.d.ts'
+				author: TUser
+				license: 'MIT'
+				private: false
+				scripts: {
+					clean: 'rimraf ./dist'
+					test: 'jest'
+					lint: 'prettier --write ./src/**/*.ts'
+					dev: 'nodemon -e ts -w ./src --exec "ts-node src"'
+					'pre-publish': 'yarn test && yarn lint && yarn clean && yarn build && yarn bundle && yarn minify'
+					bundle: 'node tools/createBundle.js'
+					minify: 'node tools/minifyBundle.js'
+					build: 'tsc'
+					start: 'node dist'
+					deploy: 'gh-pages -o github -d ./demo'
+					serve: 'live-server --port=80 ./demo'
+				}
+				dependencies: {
+					axios: '^0.21.0'
+				}
+				devDependencies: TObjectString
+				engines: {
+					node: '^12.18.0'
+					yarn: '^1.22.5'
+				}
+				homepage: 'https://github.com/EdixonAlberto/instagrapi#readme'
+				repository: {
+					type: 'git'
+					url: 'git+https://github.com/EdixonAlberto/instagrapi.git'
+				}
+				bugs: {
+					url: 'https://github.com/EdixonAlberto/instagrapi/issues'
+				}
+				gitHead: '6537bcb3608b224c355e94429796e5c72b80be04'
+				_id: 'instagrapi@3.2.3'
+				_nodeVersion: '12.18.0'
+				_npmVersion: '6.14.4'
+				dist: {
+					integrity: 'sha512-P6lglCKif4vAtple1dhlc0pFMBXTsyAKqQvoqu3lN4ccJ2pBO2iAKUnPgTbi87sPMoUH2NPkdqeN0PbfEsJ0/w=='
+					shasum: '8bcf98b5944bf905021c9ec9903814794839bb12'
+					tarball: 'https://registry.npmjs.org/instagrapi/-/instagrapi-3.2.3.tgz'
+					fileCount: 17
+					unpackedSize: 232899
+					'npm-signature':
+						'-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJgKakzCRA9TVsSAnZWagAAQosP/0A6BYjZns79LPw1zt1r\nUROD9i7rRBkMcNdIxxGjvYSYQL5EO988wU7swUILx0Pu/f3Vvjy+icSZfAfD\nSTj2dq5rnEULwt0m8HqtCXA0FZezSM0ANzY4NweuHfOL2dvZr4m69iOQWX0H\nGWtHlyF+JNr0hyu5kgYQM4T49MY/XiH1YMBi4LwBSBohH2S9lSLyLsU6nC8/\ndnV0bFvSYB7CIVtnq3vJ8TQSg3tCR7Fp8KhAhT5O7r4RmhepmrmjCtIo2xBU\nXk0tah1sG3OVuiKkNzPlaL5VP6UFdzohvzRYsr6kINvyNKh59Soixmo8VwB5\nqgD9FVP2xRwKWuBi24DyvHyMrHCQokcCl4j6a4HUTJZWt8RRC2LaxmoLjqSQ\nKaP+gsEHlHaY/6v/TBd9Ie0lIMvKZf4AoofOUSYj7VY1YsDMMLRs0/2E3vJp\n69rk8qiNXbHakQjH54DBhVFXldknoV88aXoQgijwIKTOTSef9w3kCHmaIlUP\nvbD1SoYAG6pq55QRiSag3fbTWWSRjMwsEmDy/XWPKGj3I5Q+wG4LYXsxTn4L\n/2eLYl2niXcWEp3/PAjHPOvrq8RsoYZOFlDGgbhX6ws+MKyhmShnqu3nw5qX\nGmGNInFVxpeGJbffC4qvKtWiLAcMDW0evW5vCu3Ek9v+bSO9SdUxIkJWJ0o6\n23tI\r\n=XMXl\r\n-----END PGP SIGNATURE-----\r\n'
+					signatures: [
+						{
+							keyid: 'SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA'
+							sig: 'MEYCIQDj6GjqyzNFP7FzOw8QHpiHJCZpz4LdhliZAOKYIgRUTAIhAJKgpRjbjWnLwTjKPdErempOb7elBjTxIijyP4KVoF6H'
+						},
+					]
+				}
+				_npmUser: TUser
+				directories: {}
+				maintainers: TUser[]
+				_npmOperationalInternal: {
+					host: 's3://npm-registry-packages'
+					tmp: 'tmp/instagrapi_3.2.3_1613343027383_0.5835686170172361'
+				}
+				_hasShrinkwrap: false
+				deprecated: 'Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.'
+			}
+		}
+		time: TObjectString
+		maintainers: TUser[]
+		description: 'Library to obtain information from an Instagram account in a friendly and intuitive way'
+		keywords: [
+			'instagram',
+			'api',
+			'nodejs',
+			'typescript',
+		]
+		author: {
+			name: string
+			email: string
+		}
+		license: string
+		readme: string
+		readmeFilename: string
+		homepage: string
+		repository: {
+			type: 'git' | string
+			url: string
+		}
+		bugs: {
+			url: string
+		}
+	}
+}

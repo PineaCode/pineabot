@@ -25,6 +25,8 @@ cp .env.template .env
 - [x] Ping-Pong para comprobar la velocidad de conexión con el bot.
 - [x] Reacciones automaticas hacia los comentarios generados en cualquier canal del servidor.
 - [x] Generación de comentarios infomativos relacionados a los últimos temas conversados en el canal **"chat"**. `(usando chatgpt)`
+- [x] Buscar repositorio de codigo desde GitHub
+- [x] Buscar paquetes o librerías desde NPM
 - [ ] Respuestas a preguntas relacionadas con el servidor. `(usando chatgpt)`
 - [ ] Respuestas a cualquier clase de pregunta por sesión de usuario. `(usando chatgpt)`
 - [ ] Moderación del servidor.

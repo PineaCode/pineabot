@@ -220,5 +220,90 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "db331469-9671-4cc8-9102-b2fbd3bdf218",
+    "colId": "43ff142c-2de7-49b6-8d24-751bd83a63a9",
+    "containerId": "",
+    "name": "Get package by name",
+    "url": "https://registry.npmjs.org/{package}",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-04-06T01:59:36.588Z",
+    "modified": "2023-04-06T02:24:35.861Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "package",
+        "value": "express",
+        "isPath": true
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "0e9d40ad-a0b2-40ce-9a15-74221e2e623c",
+    "colId": "e27610db-0900-41cd-8f50-8c8e44b1639c",
+    "containerId": "",
+    "name": "Get article by term",
+    "url": "https://{languageCode}.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&generator=search&exchars=120&exlimit=max&explaintext=1&exintro=1&gsrsearch=covid",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-04-06T02:44:18.090Z",
+    "modified": "2023-04-06T02:46:20.668Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "languageCode",
+        "value": "es",
+        "isPath": true
+      },
+      {
+        "name": "action",
+        "value": "query",
+        "isPath": false
+      },
+      {
+        "name": "format",
+        "value": "json",
+        "isPath": false
+      },
+      {
+        "name": "prop",
+        "value": "extracts",
+        "isPath": false
+      },
+      {
+        "name": "generator",
+        "value": "search",
+        "isPath": false
+      },
+      {
+        "name": "exchars",
+        "value": "120",
+        "isPath": false
+      },
+      {
+        "name": "exlimit",
+        "value": "max",
+        "isPath": false
+      },
+      {
+        "name": "explaintext",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "exintro",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "gsrsearch",
+        "value": "covid",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]

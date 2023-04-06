@@ -9,7 +9,7 @@ export const github: TAction = async (data, { client, request }) => {
 	if (!ownerName || !repoName) {
 		client.message.send(
 			channelId,
-			`❌ Este comando requiere de dos parametros \`ownerName\` y \`repoName\`.\nEjemplo: \`${PREFIX}github facebook react\``,
+			`❌ Este comando requiere de dos parametros.\nEjemplo: \`${PREFIX}github facebook react\``,
 		)
 		return
 	}
@@ -19,9 +19,10 @@ export const github: TAction = async (data, { client, request }) => {
 	})
 
 	if (!repository) {
-		client.message.send(channelId, 'No se ha encontrado el repositorio.')
+		client.message.send(channelId, '🔍 No se ha encontrado el repositorio.')
 		return
 	}
 
+	// TODO: crear un mensaje embed mas elaborado para enviar como respuesta
 	client.message.send(channelId, repository.html_url)
 }
