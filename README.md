@@ -21,16 +21,23 @@ cp .env.template .env
 ```
 
 ## Funcionalidades
-
+- ### Básicas
 - [x] Ping-Pong para comprobar la velocidad de conexión con el bot.
 - [x] Reacciones automaticas hacia los comentarios generados en cualquier canal del servidor.
+
+- ### Busquedas
+- [x] Buscar repositorio de código desde GitHub.
+- [x] Buscar paquetes o librerías desde NPM.
+- [x] Buscar terminos desde Wikipedia.
+- [ ] Buscar paquetes o librerias para deno y python.
+
+- ### ChatGPT
 - [x] Generación de comentarios infomativos relacionados a los últimos temas conversados en el canal **"chat"**. `(usando chatgpt)`
-- [x] Buscar repositorio de codigo desde GitHub
-- [x] Buscar paquetes o librerías desde NPM
 - [ ] Respuestas a preguntas relacionadas con el servidor. `(usando chatgpt)`
 - [ ] Respuestas a cualquier clase de pregunta por sesión de usuario. `(usando chatgpt)`
+
+- ### Otras
 - [ ] Moderación del servidor.
-- [ ] Buscador de paquetes o librerias para javascript, nodejs, deno, python, etc.
 - [ ] Sistema antiscam.
 - [ ] Ranking y sistema de recopilación de comportamientos de los usuarios.
 - [ ] Autenticación de nuevos usuarios.
