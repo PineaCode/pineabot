@@ -31,4 +31,10 @@ Deno.test('Util Service', async (t) => {
 			else assertEquals(wordFound, true)
 		})
 	})
+
+	await t.step('> Ignore Acents', () => {
+		const text = 'República (Platón)'
+		const textWitoutAcents = UtilService.ignoreAcents(text)
+		assertEquals(textWitoutAcents, 'Republica (Platon)')
+	})
 })

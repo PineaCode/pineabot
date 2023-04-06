@@ -6,6 +6,7 @@ export type TConfig =
 	| 'DISCORD_VERSION'
 	| 'TOKEN'
 	| 'PREFIX'
+	| 'WIKIPEDIA_URL'
 	| 'NPM_URL'
 	| 'GITHUB_URL'
 	| 'OPENAI_URL'

@@ -222,8 +222,7 @@ export type TApiNPM = {
 					tarball: 'https://registry.npmjs.org/instagrapi/-/instagrapi-3.2.3.tgz'
 					fileCount: 17
 					unpackedSize: 232899
-					'npm-signature':
-						'-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.13\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJgKakzCRA9TVsSAnZWagAAQosP/0A6BYjZns79LPw1zt1r\nUROD9i7rRBkMcNdIxxGjvYSYQL5EO988wU7swUILx0Pu/f3Vvjy+icSZfAfD\nSTj2dq5rnEULwt0m8HqtCXA0FZezSM0ANzY4NweuHfOL2dvZr4m69iOQWX0H\nGWtHlyF+JNr0hyu5kgYQM4T49MY/XiH1YMBi4LwBSBohH2S9lSLyLsU6nC8/\ndnV0bFvSYB7CIVtnq3vJ8TQSg3tCR7Fp8KhAhT5O7r4RmhepmrmjCtIo2xBU\nXk0tah1sG3OVuiKkNzPlaL5VP6UFdzohvzRYsr6kINvyNKh59Soixmo8VwB5\nqgD9FVP2xRwKWuBi24DyvHyMrHCQokcCl4j6a4HUTJZWt8RRC2LaxmoLjqSQ\nKaP+gsEHlHaY/6v/TBd9Ie0lIMvKZf4AoofOUSYj7VY1YsDMMLRs0/2E3vJp\n69rk8qiNXbHakQjH54DBhVFXldknoV88aXoQgijwIKTOTSef9w3kCHmaIlUP\nvbD1SoYAG6pq55QRiSag3fbTWWSRjMwsEmDy/XWPKGj3I5Q+wG4LYXsxTn4L\n/2eLYl2niXcWEp3/PAjHPOvrq8RsoYZOFlDGgbhX6ws+MKyhmShnqu3nw5qX\nGmGNInFVxpeGJbffC4qvKtWiLAcMDW0evW5vCu3Ek9v+bSO9SdUxIkJWJ0o6\n23tI\r\n=XMXl\r\n-----END PGP SIGNATURE-----\r\n'
+					'npm-signature': string
 					signatures: [
 						{
 							keyid: 'SHA256:jl3bwswu80PjjokCgh0o2w5c2U4LhQAE57gj9cz1kzA'
@@ -265,6 +264,33 @@ export type TApiNPM = {
 		}
 		bugs: {
 			url: string
+		}
+	}
+}
+
+// WIKIPEDIA ___________________________________________________________________________________________________________
+
+export type TApiWikipedia = {
+	query: {
+		batchcomplete: ''
+		continue: {
+			gsroffset: 10
+			continue: 'gsroffset||'
+		}
+		query: {
+			pages: {
+				[key: string]: {
+					pageid: 9259143
+					ns: 0
+					title: 'Pandemia de COVID-19'
+					index: 7
+					extract:
+						'La pandemia de COVID-19, conocida también como pandemia de coronavirus, es una pandemia actualmente en curso derivada de…'
+				}
+			}
+		}
+		limits: {
+			extracts: 20
 		}
 	}
 }
