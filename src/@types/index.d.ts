@@ -178,6 +178,18 @@ type TMessageCreateData = {
 	mentions: []
 	mention_roles: []
 	mention_everyone: boolean
+	member: {
+		roles: string[]
+		premium_since: null
+		pending: boolean
+		nick: string
+		mute: boolean
+		joined_at: string
+		flags: number
+		deaf: boolean
+		communication_disabled_until: null
+		avatar: null
+	}
 	id: string
 	flags: number
 	embeds: Array<{

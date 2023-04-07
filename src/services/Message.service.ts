@@ -1,22 +1,14 @@
-import { ConfigService } from '$/services/Config.service.ts'
-import { RequestService } from '$/services/Request.service.ts'
+import { ApiDiscord } from '$/class/ApiDiscord.ts'
 
-export class MessageService {
-	private readonly config = new ConfigService()
-	private readonly http: RequestService['http']
-
+export class MessageService extends ApiDiscord {
 	constructor(token: string) {
-		const { DISCORD_URL_API = '', DISCORD_VERSION = '10' } = this.config.getObject()
-		const baseUrl = `${DISCORD_URL_API}/api/v${DISCORD_VERSION}`
-		this.http = new RequestService(baseUrl, `Bot ${token}`).http
+		super(token)
 	}
 
 	public async read(channelIdList: string[], limit: number): Promise<(TGetMessages[] | null)[]> {
 		return await Promise.all(
 			channelIdList.map((channelId: string) => {
-				return this.http.request<TGetMessages[]>(`/channels/${channelId}/messages?limit=${limit}`, {
-					method: 'GET',
-				})
+				return this.request<TGetMessages[]>(`/channels/${channelId}/messages?limit=${limit}`)
 			}),
 		)
 	}
@@ -27,7 +19,7 @@ export class MessageService {
 
 		return await Promise.all(
 			channelIdList.map((channelId: string) => {
-				return this.http.request<TSendMessage>(`/channels/${channelId}/messages`, {
+				return this.request<TSendMessage>(`/channels/${channelId}/messages`, {
 					method: 'POST',
 					body: formData,
 				})
@@ -36,7 +28,7 @@ export class MessageService {
 	}
 
 	public async delete(channelId: string, messageId: string): Promise<void> {
-		const data = await this.http.request<void | { message: string; code: number }>(
+		const data = await this.request<void | { message: string; code: number }>(
 			`/channels/${channelId}/messages/${messageId}`,
 			{
 				method: 'DELETE',

@@ -5,6 +5,7 @@ import { UtilService } from '$/services/Util.service.ts'
 import { GatewayService } from '$/services/Gateway.service.ts'
 import { MessageService } from '$/services/Message.service.ts'
 import { RequestService } from '$/services/Request.service.ts'
+import { RoleService } from '$/services/Roles.service.ts'
 import { Events, TClientOptions, TTools } from '$/concord/typing.ts'
 import { Loaders } from '$/concord/Loaders.ts'
 
@@ -13,8 +14,9 @@ export class Client extends UtilService {
 	private options: TClientOptions
 	private loaders: Loaders
 	public on: TEventFC
-	public message: MessageService
 	public envs: Record<TConfig, string>
+	public message: MessageService
+	public role!: RoleService
 
 	constructor(options?: Partial<TClientOptions>) {
 		super()
@@ -37,6 +39,8 @@ export class Client extends UtilService {
 	public async start(): Promise<void> {
 		await new Promise((resolve, _reject) => {
 			this.on(Events.Ready, (data: TReadyData) => {
+				this.role = new RoleService(this.envs.TOKEN, data.guilds[0].id)
+
 				this.loaders.actions['ready'](data, {
 					client: this,
 					request: new RequestService().http.request,
