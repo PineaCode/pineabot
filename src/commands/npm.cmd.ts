@@ -4,7 +4,7 @@ import type { TApiNPM } from '$/types/apis.type.ts'
 export const npm: TAction = async (data, { client, request }) => {
 	const { NPM_URL, PREFIX } = client.envs
 	const channelId = [data.channel_id]
-	const pkgName = data.content.toLowerCase()
+	const pkgName = data.content
 
 	if (!pkgName) {
 		client.message.send(

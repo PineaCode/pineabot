@@ -4,7 +4,7 @@ import type { TApiGithub } from '$/types/apis.type.ts'
 export const github: TAction = async (data, { client, request }) => {
 	const { GITHUB_URL, PREFIX } = client.envs
 	const channelId = [data.channel_id]
-	const [ownerName, repoName] = data.content.toLowerCase().split(' ').filter((msg: string) => msg)
+	const [ownerName, repoName] = data.content.split(' ').filter((msg: string) => msg)
 
 	if (!ownerName || !repoName) {
 		client.message.send(

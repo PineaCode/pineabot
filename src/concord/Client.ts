@@ -69,7 +69,7 @@ export class Client extends UtilService {
 					this.loaders.actions[command](
 						<TMessageCreateData> {
 							...data,
-							content: messages.join(' '),
+							content: messages.join(' ').toLowerCase(),
 						},
 						tools,
 					)

@@ -5,7 +5,7 @@ import { UtilService } from '$/services/Util.service.ts'
 export const wiki: TAction = async (data, { client, request }) => {
 	const { WIKIPEDIA_URL, PREFIX } = client.envs
 	const channelId = [data.channel_id]
-	const term = data.content.toLowerCase()
+	const term = data.content
 
 	if (!term) {
 		client.message.send(

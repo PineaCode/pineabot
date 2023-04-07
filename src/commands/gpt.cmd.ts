@@ -30,7 +30,7 @@ export const gpt: TAction = async (data, { client, request }) => {
 	}
 
 	const { username: user, id: userId } = data.author
-	const message = data.content.trim()
+	const message = data.content
 	const { OPENAI_URL, OPENAI_API_KEY } = client.envs
 
 	const response = await request<TApiOpenAI['completions']>(OPENAI_URL + '/v1/chat/completions', {
