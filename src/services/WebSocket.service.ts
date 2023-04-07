@@ -1,7 +1,7 @@
 export class WebSocketService {
 	public readonly ws: WebSocket
 
-	constructor(wsURL: string, callbackOpen: () => void) {
+	constructor(wsURL: string, callbackOpen?: () => void) {
 		this.ws = new WebSocket(wsURL)
 		this.events(callbackOpen)
 	}
@@ -12,10 +12,10 @@ export class WebSocketService {
 		}
 	}
 
-	private events(callbackOpen: () => void): void {
+	private events(callbackOpen?: () => void): void {
 		this.ws.onopen = (_event) => {
 			console.log(WebSocketService.name, 'START ')
-			callbackOpen()
+			if (callbackOpen) callbackOpen()
 		}
 
 		this.ws.onclose = (event) => {
