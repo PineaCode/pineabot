@@ -14,9 +14,7 @@ export const npm: TAction = async (data, { client, request }) => {
 		return
 	}
 
-	const packageNpm = await request<TApiNPM>(`${NPM_URL}/${pkgName}`, {
-		method: 'GET',
-	})
+	const packageNpm = await request<TApiNPM>(`${NPM_URL}/${pkgName}`)
 
 	if (!packageNpm) {
 		client.message.send(channelId, '🔍 No se ha encontrado el paquete.')

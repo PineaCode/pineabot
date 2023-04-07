@@ -14,9 +14,7 @@ export const github: TAction = async (data, { client, request }) => {
 		return
 	}
 
-	const repository = await request<TApiGithub['repos']>(`${GITHUB_URL}/repos/${ownerName}/${repoName}`, {
-		method: 'GET',
-	})
+	const repository = await request<TApiGithub['repos']>(`${GITHUB_URL}/repos/${ownerName}/${repoName}`)
 
 	if (!repository) {
 		client.message.send(channelId, '🔍 No se ha encontrado el repositorio.')

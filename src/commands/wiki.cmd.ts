@@ -19,9 +19,6 @@ export const wiki: TAction = async (data, { client, request }) => {
 		`${WIKIPEDIA_URL}/w/api.php?action=query&format=json&prop=extracts&generator=search&exchars=120&exlimit=max&explaintext=1&exintro=1&gsrsearch=${
 			term.replace(/ /g, '_')
 		}`,
-		{
-			method: 'GET',
-		},
 	)
 
 	if (result && result?.query?.pages) {
