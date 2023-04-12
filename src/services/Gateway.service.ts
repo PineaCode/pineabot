@@ -62,13 +62,14 @@ export class GatewayService {
 
 				// Realizar una reconección si ocurre un error
 				if (operation === GatewayOpcodes.Reconnect) {
+					// this.send([{
+					// 	op: GatewayOpcodes.Reconnect,
+					// 	d: null,
+					// }])
 					this.stopConnection()
+
 					if (this.evt) {
-						this.send([{
-							op: GatewayOpcodes.Reconnect,
-							d: null,
-						}])
-						const event = new CustomEvent('reset', <TEvt> { detail: 'RESET CLIENT' })
+						const event = new CustomEvent('reset', <TEvt> { detail: 'RESET' })
 						this.evt.dispatchEvent(event)
 					}
 					return
@@ -92,9 +93,9 @@ export class GatewayService {
 	}
 
 	public stopConnection(): void {
-		this.ws.close()
 		clearInterval(this.heartbeatInterval)
 		this.heartbeatInterval = 0
+		this.ws.close()
 		console.log(GatewayService.name, 'STOP')
 	}
 }

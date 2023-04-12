@@ -9,7 +9,7 @@ export async function reaction(channelId: string, message: string, client: Clien
 	}
 
 	// UwU
-	if (message.includes('uwu')) {
+	if (message.includes('uwu') || message.includes('owo')) {
 		await client.message.send([channelId], 'OwO 😳')
 	}
 
