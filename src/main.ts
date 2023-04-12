@@ -1,5 +1,6 @@
 import { ConfigService } from '$/services/Config.service.ts'
 import { Client } from '$/concord/Client.ts'
+import type { TEvt } from '$TYPES'
 
 try {
 	// Cargar variables de entorno en el proyecto
@@ -11,8 +12,8 @@ try {
 	let client = new Client({}, evt)
 	await client.start()
 
-	evt.addEventListener('reset', async (event: any) => {
-		console.log(event.detail)
+	evt.addEventListener('reset', async (event: TEvt) => {
+		console.log('Client', event.detail)
 		client = new Client({}, evt)
 		await client.start()
 	})
