@@ -17,4 +17,7 @@ export const WORDS_HOT = [
 	'noporn',
 	'rico',
 	'hentai',
+	'pito',
+	'besame',
+	'abrazame',
 ]
