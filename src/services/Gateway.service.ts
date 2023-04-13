@@ -1,22 +1,19 @@
 import { ConfigService } from '$/services/Config.service.ts'
 import { WebSocketService } from '$/services/WebSocket.service.ts'
 import { GatewayDispatchEvents, GatewayIntentBits, GatewayOpcodes } from '$/typing.ts'
-import type { TEvt } from '$TYPES'
 
 export class GatewayService {
 	private readonly config = new ConfigService()
 	private ws!: WebSocketService['ws']
 	private send!: WebSocketService['sendPayloadList']
 	private heartbeatInterval = 0
-	private evt?: EventTarget
 
 	constructor(token: string, prefix: string, evt?: EventTarget) {
 		const { DISCORD_URL_WS = '', DISCORD_VERSION = '10' } = this.config.getObject()
 		const wsURL = `${DISCORD_URL_WS}/?v=${DISCORD_VERSION}&encoding=json`
-		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token, prefix))
+		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token, prefix), evt)
 		this.ws = ws
 		this.send = sendPayloadList
-		this.evt = evt
 	}
 
 	private init(token: string, prefix: string): () => void {
@@ -62,16 +59,7 @@ export class GatewayService {
 
 				// Realizar una reconección si ocurre un error
 				if (operation === GatewayOpcodes.Reconnect) {
-					// this.send([{
-					// 	op: GatewayOpcodes.Reconnect,
-					// 	d: null,
-					// }])
 					this.stopConnection()
-
-					if (this.evt) {
-						const event = new CustomEvent('reset', <TEvt> { detail: 'RESET' })
-						this.evt.dispatchEvent(event)
-					}
 					return
 				}
 
