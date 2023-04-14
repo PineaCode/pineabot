@@ -1,4 +1,4 @@
-import { TAction } from '$/concord/typing.ts'
+import type { TAction, TReadyData } from '$TYPES'
 import { justChating } from '$/functions/justChating.fc.ts'
 
 // deno-lint-ignore require-await

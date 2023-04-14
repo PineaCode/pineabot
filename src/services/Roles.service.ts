@@ -1,5 +1,5 @@
+import type { TRole } from '$TYPES'
 import { ApiDiscord } from '$/class/ApiDiscord.ts'
-import type { TRole } from '$/types/discord.type.ts'
 
 export class RoleService extends ApiDiscord {
 	private guildId: string

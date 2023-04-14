@@ -1,3 +1,4 @@
+import type { TGetMessages, TSendMessage } from '$TYPES'
 import { ApiDiscord } from '$/class/ApiDiscord.ts'
 
 export class MessageService extends ApiDiscord {

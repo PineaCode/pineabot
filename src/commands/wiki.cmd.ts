@@ -1,5 +1,4 @@
-import type { TAction } from '$/concord/typing.ts'
-import type { TApiWikipedia } from '$/types/apis.type.ts'
+import type { TAction, TApiWikipedia } from '$TYPES'
 import { UtilService } from '$/services/Util.service.ts'
 
 export const wiki: TAction = async (data, { client, request }) => {

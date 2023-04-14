@@ -1,4 +1,4 @@
-import { TAction } from '$/concord/typing.ts'
+import type { TAction, TMessageCreateData } from '$TYPES'
 import { reaction } from '$/functions/reactions.fc.ts'
 
 export const messageCreate: TAction<TMessageCreateData> = async (data, { client }) => {

@@ -1,7 +1,10 @@
-import type { TTools } from '$/concord/typing.ts'
-import type { TApiOpenAI } from '$/types/apis.type.ts'
+import type { TApiOpenAI, TTools } from '$TYPES'
 
-export async function justChating({ client, request }: TTools) {
+export function justChating({ client, request }: TTools) {
+	const TIME_CHATING = 1000 * 60 * 60 // 1 hora
+	const MIN_COMMENTS = 2
+	const MAX_COMMENTS = 4
+
 	setInterval(async () => {
 		const CHANNEL_ID = client.envs.CHANNEL_ID_CHAT
 		const [messages] = await client.message.read([CHANNEL_ID], 10)
@@ -33,8 +36,8 @@ export async function justChating({ client, request }: TTools) {
 			}
 		}
 
-		if (commentList.length > 2) {
-			const comments = commentList.filter((_comment: string, i: number) => i < 4)
+		if (commentList.length > MIN_COMMENTS) {
+			const comments = commentList.filter((_comment: string, i: number) => i < MAX_COMMENTS)
 			const strComments = comments.map((comment: string) => `- "${comment.substring(0, 150)}"`).join('\n')
 			const { OPENAI_URL, OPENAI_API_KEY } = client.envs
 
@@ -65,5 +68,5 @@ El texto debe parecerse a un comentario de un usuario más en el servidor, debe 
 				await client.message.send([CHANNEL_ID], PREFIX_BOT + content)
 			}
 		}
-	}, 1000 * 60 * 60)
+	}, TIME_CHATING)
 }

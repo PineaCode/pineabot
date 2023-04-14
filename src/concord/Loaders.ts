@@ -1,9 +1,10 @@
 import { resolve } from 'path'
 
-import { TAction } from '$/concord/typing.ts'
+import type { TAction } from '$TYPES'
 
 export class Loaders {
-	public actions!: TActionList
+	// deno-lint-ignore no-explicit-any
+	public actions!: { [key: string]: TAction<any> }
 
 	constructor(eventsPath: string, commandsPath: string) {
 		this.eventLoad(eventsPath)

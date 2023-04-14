@@ -1,5 +1,4 @@
-import type { TAction } from '$/concord/typing.ts'
-import type { TApiNPM } from '$/types/apis.type.ts'
+import type { TAction, TApiNPM } from '$TYPES'
 
 export const npm: TAction = async (data, { client, request }) => {
 	const { NPM_URL, PREFIX } = client.envs

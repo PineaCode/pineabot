@@ -1,6 +1,7 @@
+import type { TEventFC, TEventPayload, THeartBeatData } from '$TYPES'
 import { ConfigService } from '$/services/Config.service.ts'
 import { WebSocketService } from '$/services/WebSocket.service.ts'
-import { GatewayDispatchEvents, GatewayIntentBits, GatewayOpcodes } from '$/typing.ts'
+import { GatewayDispatchEvents, GatewayIntentBits, GatewayOpcodes } from '$/entities/enums.ts'
 
 export class GatewayService {
 	private readonly config = new ConfigService()

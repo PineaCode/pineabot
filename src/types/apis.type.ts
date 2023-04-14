@@ -231,7 +231,7 @@ export type TApiNPM = {
 					]
 				}
 				_npmUser: TUser
-				directories: {}
+				directories: null
 				maintainers: TUser[]
 				_npmOperationalInternal: {
 					host: 's3://npm-registry-packages'

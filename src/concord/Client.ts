@@ -1,12 +1,13 @@
 import { resolve } from 'path'
 
+import type { TClientOptions, TEventFC, TMessageCreateData, TReadyData, TTools } from '$TYPES'
 import { ConfigService, TConfig } from '$/services/Config.service.ts'
 import { UtilService } from '$/services/Util.service.ts'
 import { GatewayService } from '$/services/Gateway.service.ts'
 import { MessageService } from '$/services/Message.service.ts'
 import { RequestService } from '$/services/Request.service.ts'
 import { RoleService } from '$/services/Roles.service.ts'
-import { Events, TClientOptions, TTools } from '$/concord/typing.ts'
+import { GatewayDispatchEvents as Events } from '$/entities/enums.ts'
 import { Loaders } from '$/concord/Loaders.ts'
 
 export class Client extends UtilService {
@@ -18,7 +19,7 @@ export class Client extends UtilService {
 	public message: MessageService
 	public role!: RoleService
 
-	constructor(options?: Partial<TClientOptions>, evt?: any) {
+	constructor(options?: Partial<TClientOptions>, evt?: EventTarget) {
 		super()
 		this.envs = this.config.getObject()
 		const { TOKEN = '', PREFIX = '$' } = this.envs

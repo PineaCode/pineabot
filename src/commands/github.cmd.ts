@@ -1,5 +1,4 @@
-import type { TAction } from '$/concord/typing.ts'
-import type { TApiGithub } from '$/types/apis.type.ts'
+import type { TAction, TApiGithub } from '$TYPES'
 
 export const github: TAction = async (data, { client, request }) => {
 	const { GITHUB_URL, PREFIX } = client.envs

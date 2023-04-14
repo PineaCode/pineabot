@@ -1,5 +1,4 @@
-import type { TAction } from '$/concord/typing.ts'
-import type { TApiOpenAI } from '$/types/apis.type.ts'
+import type { TAction, TApiOpenAI } from '$TYPES'
 
 export const gpt: TAction = async (data, { client, request }) => {
 	if (!data.member.roles.includes('827701782020620289')) {

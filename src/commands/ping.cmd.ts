@@ -1,4 +1,4 @@
-import type { TAction } from '$/concord/typing.ts'
+import type { TAction } from '$TYPES'
 
 export const ping: TAction = async (data, { client }) => {
 	const dateMessage = new Date(data.timestamp).getTime()

@@ -1,6 +1,6 @@
+import type { TEvt } from '$TYPES'
 import { ConfigService } from '$/services/Config.service.ts'
 import { Client } from '$/concord/Client.ts'
-import type { TEvt } from '$TYPES'
 
 try {
 	// Cargar variables de entorno en el proyecto
