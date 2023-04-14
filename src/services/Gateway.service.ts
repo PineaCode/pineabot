@@ -9,10 +9,10 @@ export class GatewayService {
 	private send!: WebSocketService['sendPayloadList']
 	private heartbeatInterval = 0
 
-	constructor(token: string, prefix: string, evt?: EventTarget) {
+	constructor(token: string, prefix: string) {
 		const { DISCORD_URL_WS = '', DISCORD_VERSION = '10' } = this.config.getObject()
 		const wsURL = `${DISCORD_URL_WS}/?v=${DISCORD_VERSION}&encoding=json`
-		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token, prefix), evt)
+		const { ws, sendPayloadList } = new WebSocketService(wsURL, this.init(token, prefix))
 		this.ws = ws
 		this.send = sendPayloadList
 	}

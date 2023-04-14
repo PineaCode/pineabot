@@ -1,11 +1,12 @@
 import type { TApiOpenAI, TTools } from '$TYPES'
+import { EventService } from '$/services/Event.service.ts'
 
 export function justChating({ client, request }: TTools) {
 	const TIME_CHATING = 1000 * 60 * 60 // 1 hora
 	const MIN_COMMENTS = 2
 	const MAX_COMMENTS = 4
 
-	setInterval(async () => {
+	const chatingInterval = setInterval(async () => {
 		const CHANNEL_ID = client.envs.CHANNEL_ID_CHAT
 		const [messages] = await client.message.read([CHANNEL_ID], 10)
 		if (!messages) return
@@ -69,4 +70,8 @@ El texto debe parecerse a un comentario de un usuario más en el servidor, debe 
 			}
 		}
 	}, TIME_CHATING)
+
+	EventService.evt.addEventListener('reset', (_event) => {
+		clearInterval(chatingInterval)
+	})
 }

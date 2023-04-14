@@ -1,13 +1,13 @@
 import type { TEvt } from '$TYPES'
+import { EventService } from '$/services/Event.service.ts'
 
-export class WebSocketService {
+export class WebSocketService extends EventService {
 	public readonly ws: WebSocket
-	private evt?: EventTarget
 
-	constructor(wsURL: string, callbackOpen?: () => void, evt?: EventTarget) {
+	constructor(wsURL: string, callbackOpen?: () => void) {
+		super()
 		this.ws = new WebSocket(wsURL)
 		this.events(callbackOpen)
-		this.evt = evt
 	}
 
 	public sendPayloadList(payloadList: unknown[]): void {
@@ -31,7 +31,7 @@ export class WebSocketService {
 		}
 
 		this.ws.onerror = (event) => {
-			console.log(WebSocketService.name, 'ERROR', event)
+			console.log(WebSocketService.name, 'ERROR', event instanceof ErrorEvent ? event.message : event)
 		}
 	}
 }
