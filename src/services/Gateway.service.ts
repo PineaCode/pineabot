@@ -37,7 +37,7 @@ export class GatewayService {
 				d: {
 					since: 91879201,
 					activities: [{
-						name: `comando ${prefix}`,
+						name: prefix,
 						type: 2,
 					}],
 					status: 'online',
