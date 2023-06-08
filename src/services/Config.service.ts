@@ -12,6 +12,9 @@ export type TConfig =
 	| 'OPENAI_URL'
 	| 'OPENAI_API_KEY'
 	| 'CHANNEL_ID_CHAT'
+	| 'CHANNEL_ID_PLATZI'
+	| 'PLATZI_URL'
+	| 'PLATZI_API_KEY'
 
 export class ConfigService {
 	private static envs: Record<TConfig, string>

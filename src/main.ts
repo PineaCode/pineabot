@@ -1,7 +1,7 @@
 import type { TEvt } from '$TYPES'
 import { ConfigService } from '$/services/Config.service.ts'
+import { EventService } from '$/services/Event.service.ts'
 import { Client } from '$/concord/Client.ts'
-import { EventService } from './services/Event.service.ts'
 
 try {
 	// Cargar variables de entorno en el proyecto

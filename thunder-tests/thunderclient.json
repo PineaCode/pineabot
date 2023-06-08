@@ -305,5 +305,40 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "b9edf77e-c602-45f7-9cff-933fdea6ddba",
+    "colId": "bbf4ecab-e013-4da5-9b39-8746577dbc54",
+    "containerId": "",
+    "name": "template request Copy",
+    "url": "{{DISCORD_URL_API}}/api/v{{DISCORD_VERSION}}/applications/{my_application_id}/guilds/{guild_id}/commands",
+    "method": "POST",
+    "sortNum": 12500,
+    "created": "2023-04-14T03:30:26.205Z",
+    "modified": "2023-04-14T03:33:57.398Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "my_application_id",
+        "value": "1072351742810914826",
+        "isPath": true
+      },
+      {
+        "name": "guild_id",
+        "value": "826117250657419315",
+        "isPath": true
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"blep\",\n  \"type\": 1,\n  \"description\": \"Send a random adorable animal photo\",\n  \"options\": [\n    {\n      \"name\": \"animal\",\n      \"description\": \"The type of animal\",\n      \"type\": 3,\n      \"required\": true,\n      \"choices\": [\n        {\n          \"name\": \"Dog\",\n          \"value\": \"animal_dog\"\n        },\n        {\n          \"name\": \"Cat\",\n          \"value\": \"animal_cat\"\n        },\n        {\n          \"name\": \"Penguin\",\n          \"value\": \"animal_penguin\"\n        }\n      ]\n    },\n    {\n      \"name\": \"only_smol\",\n      \"description\": \"Whether to show only baby animals\",\n      \"type\": 5,\n      \"required\": false\n    }\n  ]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{TOKEN}}",
+      "bearerPrefix": "Bot"
+    },
+    "tests": []
   }
 ]

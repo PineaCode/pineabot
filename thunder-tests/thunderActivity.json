@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "_id": "8ff0a993-175c-453f-a4fb-04e15e5c93f2",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://2047-186-185-144-20.ngrok.io/interactions",
+    "url": "https://6bc1-186-185-144-20.ngrok.io/interactions",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-14T04:14:32.796Z",
+    "modified": "2023-04-14T04:36:19.004Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"message\": \"hello\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

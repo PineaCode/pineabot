@@ -21,22 +21,28 @@ cp .env.template .env
 ```
 
 ## Funcionalidades
-- ### Básicas
+- ### ⭐ Funciones Básicas
 - [x] Ping-Pong para comprobar la velocidad de conexión con el bot.
 - [x] Reacciones automaticas hacia los comentarios generados en cualquier canal del servidor.
 
-- ### Busquedas
+- ### 🔍 Busquedas
 - [x] Buscar repositorio de código desde GitHub.
 - [x] Buscar paquetes o librerías desde NPM.
 - [x] Buscar terminos desde Wikipedia.
 - [ ] Buscar paquetes o librerias para deno y python.
 
-- ### ChatGPT
-- [x] Generación de comentarios infomativos relacionados a los últimos temas conversados en el canal **"chat"**. `(usando chatgpt)`
-- [ ] Respuestas a preguntas relacionadas con el servidor. `(usando chatgpt)`
-- [ ] Respuestas a cualquier clase de pregunta por sesión de usuario. `(usando chatgpt)`
+- ### 🤖 ChatGPT
+- [x] Generación de comentarios organicos relacionados a los últimos temas conversados en el canal `[💬︱chat]`.
+- [ ] Respuestas a preguntas relacionadas con el servidor.
+- [ ] Respuestas a cualquier clase de pregunta por sesión de usuario.
 
-- ### Otras
+- ### 🔔 Alertas Periodicas
+- [x] Publicaciones del [blog de Platzi](https://platzi.com/blog/) en el canal `[#🔔︱platzi]`.
+> NOTA: Se usó el siguiente proyecto: [https://github.com/EdixonAlberto/api-blog-platzi](https://github.com/EdixonAlberto/api-blog-platzi).
+- [ ] Publicaciones de blogs y noticias sobre programación.
+- [ ] Publicaciones de noticias sobre Venezuela.
+
+- ### 🎁 Otras Funciones
 - [ ] Moderación del servidor.
 - [ ] Sistema antiscam.
 - [ ] Ranking y sistema de recopilación de comportamientos de los usuarios.
@@ -54,8 +60,8 @@ cp .env.template .env
 
 ## Concord
 
-Los archivos ubicados en la carpeta [./src/concord](./src/concord/) fueron creados a partir de una librería de Node.js
-para crear bots de discord de forma fácil y rápida, el enlace a NPM es el siguiente: [https://www.npmjs.com/package/@edixon/concord](https://www.npmjs.com/package/@edixon/concord)
+Los archivos ubicados en la carpeta [./src/concord](./src/concord/) fueron creados inspirado en una librería de Node.js
+para crear bots de discord, este es el enlace a NPM: [https://www.npmjs.com/package/@edixon/concord](https://www.npmjs.com/package/@edixon/concord)
 
 En el futuro se tiene pensado deprecar dicha librería y crear una para Deno basandose en la construcción y evolución de este proyecto.
 

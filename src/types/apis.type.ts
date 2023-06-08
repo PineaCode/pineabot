@@ -294,3 +294,20 @@ export type TApiWikipedia = {
 		}
 	}
 }
+
+// PLATZI ______________________________________________________________________________________________________________
+
+export type TApiPlatzi = {
+	error: string[]
+	response: Array<{
+		link: string
+		title: string
+		preview: string
+		author: string
+		author_picture: string
+		likes: number
+		comments: number
+		relative_time: string
+	}>
+	status_code: number
+}

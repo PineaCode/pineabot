@@ -1,19 +1,19 @@
 import type { TApiOpenAI, TTools } from '$TYPES'
 import { EventService } from '$/services/Event.service.ts'
 
-export function justChating({ client, request }: TTools) {
-	const TIME_CHATING = 1000 * 60 * 60 // 1 hora
-	const MIN_COMMENTS = 2
-	const MAX_COMMENTS = 4
+export function justChating({ client, request }: TTools): void {
+	const TIME_CHATING = (1000 * 60 * 60) * 1 // 1 hora
+	const MIN_COMMENTS = 6
+	const MAX_COMMENTS = 10
+	const CHANNEL_ID = client.envs.CHANNEL_ID_CHAT
+	const PREFIX_BOT = '_'
 
 	const chatingInterval = setInterval(async () => {
-		const CHANNEL_ID = client.envs.CHANNEL_ID_CHAT
 		const [messages] = await client.message.read([CHANNEL_ID], 10)
 		if (!messages) return
 
 		// Preparar lista de comentarios para enviar a chatgpt
 		const commentList: string[] = []
-		const PREFIX_BOT = '_'
 		for (let i = 0; i < messages.length; i++) {
 			const msg = messages[i]
 
