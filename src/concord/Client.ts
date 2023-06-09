@@ -19,13 +19,13 @@ export class Client extends UtilService {
 	public message: MessageService
 	public role!: RoleService
 
-	constructor(options?: Partial<TClientOptions>, evt?: EventTarget) {
+	constructor(options?: Partial<TClientOptions>) {
 		super()
 		this.envs = this.config.getObject()
 		const { TOKEN = '', PREFIX = '$' } = this.envs
 		const token = options?.token || TOKEN
 
-		const gateway = new GatewayService(token, PREFIX, evt)
+		const gateway = new GatewayService(token, PREFIX)
 		this.message = new MessageService(token)
 
 		this.options = {

@@ -3,14 +3,14 @@ import { EventService } from '$/services/Event.service.ts'
 import { PlatziService } from '$/services/Platzi.service.ts'
 
 export function blogPlatzi({ client }: TTools): void {
-	const TIME_UPDATE_POSTS = (1000 * 60 * 60) * 4 // 4 horas
+	const TIME_UPDATE_POSTS = (1000 * 60 * 60) * 2 // 2 horas
 	const CHANNEL_ID = client.envs.CHANNEL_ID_PLATZI
 	const platzi = new PlatziService()
 
-	const postsInterval = setInterval(async () => {
+	const updatePosts = async () => {
 		const posts = await platzi.getLastPosts()
 		const [messages] = await client.message.read([CHANNEL_ID], 10)
-		const postslink: string[] = messages?.map((message) => message.content.split('\n')[1]) || [] // Obtener solo los links
+		const postslink: string[] = messages?.map((message) => message.content.split('\n')[2]) || [] // Obtener solo los links
 		let postsToSend: TApiPlatzi['response'] = []
 
 		if (postslink.length) {
@@ -27,10 +27,10 @@ export function blogPlatzi({ client }: TTools): void {
 		const postsMessage = postsToSend.map((post) => {
 			// deno-fmt-ignore
 			return `
-${post.title}
+**${post.title}**
 (${post.likes || 'Sin'} Like${post.likes > 1 ? 's' : ''})  (${post.comments || 'Sin'} Comentario${post.comments > 1 ? 's' : ''})
 ${post.link}`
-		})
+		}).reverse() // Se aplica "reverse" para que el último mensaje enviado corresponda al último post creado
 
 		postsMessage.map((postMessage, index) => {
 			// Enviar los mensajes cada 2 segundos, por dos motivos:
@@ -40,7 +40,10 @@ ${post.link}`
 				client.message.send([CHANNEL_ID], postMessage)
 			}, (index + 1) * 2000) // Ventana de 2 segundos
 		})
-	}, TIME_UPDATE_POSTS)
+	}
+
+	updatePosts()
+	const postsInterval = setInterval(updatePosts, TIME_UPDATE_POSTS)
 
 	EventService.evt.addEventListener('reset', (_event) => {
 		clearInterval(postsInterval)
