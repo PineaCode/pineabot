@@ -10,15 +10,19 @@ export function blogPlatzi({ client }: TTools): void {
 	const updatePosts = async () => {
 		const posts = await platzi.getLastPosts()
 		const [messages] = await client.message.read([CHANNEL_ID], 10)
-		const postslink: string[] = messages?.map((message) => message.content.split('\n')[2]) || [] // Obtener solo los links
+		const postslink: string[] = messages?.map((message) => message.content.split('\n')[1]) || [] // Obtener solo los links
 		let postsToSend: TApiPlatzi['response'] = []
 
 		if (postslink.length) {
-			// Filtrar los posts que ya se hayan enviado al canal
 			for (let i = 0; i < posts.length; i++) {
 				const post = posts[i]
-				const postNotFound = !postslink.find((link) => link === post.link)
-				if (postNotFound) postsToSend.push(post)
+				// Descartar los posts que no se hayan publicado el día de hoy
+				if (post.relative_time !== 'horas') return
+				// Descartar los posts que ya se hayan enviado al canal del servidor
+				const postFound = postslink.find((link) => link === post.link)
+				if (postFound) return
+
+				postsToSend.push(post)
 			}
 		} else postsToSend = posts
 
@@ -28,7 +32,6 @@ export function blogPlatzi({ client }: TTools): void {
 			// deno-fmt-ignore
 			return `
 **${post.title}**
-(${post.likes || 'Sin'} Like${post.likes > 1 ? 's' : ''})  (${post.comments || 'Sin'} Comentario${post.comments > 1 ? 's' : ''})
 ${post.link}`
 		}).reverse() // Se aplica "reverse" para que el último mensaje enviado corresponda al último post creado
 

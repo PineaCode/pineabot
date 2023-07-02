@@ -1,9 +1,9 @@
 {
   "imports": {
     "$/": "./src/",
+    "$TYPES": "./src/types/_index.ts",
     "dotenv": "https://deno.land/std@0.179.0/dotenv/mod.ts",
     "path": "https://deno.land/std@0.179.0/path/mod.ts",
-    "testing/": "https://deno.land/std@0.181.0/testing/",
-    "$TYPES": "./src/types/_index.ts"
+    "testing/": "https://deno.land/std@0.181.0/testing/"
   }
 }
