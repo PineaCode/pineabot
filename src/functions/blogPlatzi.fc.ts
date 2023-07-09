@@ -17,7 +17,7 @@ export function blogPlatzi({ client }: TTools): void {
 			for (let i = 0; i < posts.length; i++) {
 				const post = posts[i]
 				// Descartar los posts que no se hayan publicado el día de hoy
-				if (post.relative_time !== 'horas') return
+				if (!post.relative_time.includes('horas')) return
 				// Descartar los posts que ya se hayan enviado al canal del servidor
 				const postFound = postslink.find((link) => link === post.link)
 				if (postFound) return

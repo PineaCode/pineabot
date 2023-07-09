@@ -1,6 +1,9 @@
 {
   "recommendations": [
     "denoland.vscode-deno",
-    "jabacchetta.javascript-snippets"
+    "mgmcdermott.vscode-language-babel",
+    "xabikos.javascriptsnippets",
+    "irongeek.vscode-env",
+    "rangav.vscode-thunder-client"
   ]
 }
